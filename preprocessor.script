@@ -1,0 +1,288 @@
+// write your script here!
+Interface {
+  Inputs {}
+  Outputs {}
+  Parameters {
+    Field PatientDataDirectory {type = String} //source folder of 2d dcm slices
+    Field DestinationDataDirectory {type = String} //destination folder to save the 3d images
+    Field Dcm3DDirectory {type=String}
+    Field NiiDirectory {type = String}
+    Field RawDirectory {type = String}
+    Field ObjDirectory {type = String}
+    Field PatientID {type = String} //patient ID to identify a specific patient
+    Field T2SeriesPath {type = String} //source path of 3d t2 series
+    Field ADCSeriesPath {type = String} //source path of 3d ADC series
+    Field DestinationLabelPath {type = String}  //destination path of 3d label
+    Field MarkingProstate {type = Bool} //whether drawing cso of prostate or not
+    Field MarkingLesion {type = Bool} //whether drawing cso of lesion or not
+    Field MarkingRectum {type = Bool} //whether drawing cso of rectum or not
+    Field RectumReverse {type = Bool} //whether the lower layers of the dcm slices are in coordinate with the inner part of the rectum
+    Field DisplayProstate {type = Bool} //whether display the label of prostate or not
+    Field DisplayLesion {type = Bool} //whether display the label of lesion or not
+    Field DisplayRectum {type = Bool} //whether display the label of rectum or not
+    Field ProstateFaceAlpha {
+      type = Float
+      min = 0
+      max = 1
+    } //face alpha of prostate while viewing 3d label
+    Field LesionFaceAlpha {
+      type = Float
+      min = 0
+      max = 1
+    } //face alpha of lesion while viewing 3d label
+    Field RectumFaceAlpha {
+      type = Float
+      min = 0
+      max = 1
+    } //face alpha of rectum while viewing 3d label
+  }
+}
+
+Commands {
+  source = $(LOCAL)/preprocessor.py
+  FieldListener  {
+    listenField = T2SeriesPath
+    command = SetT2Path
+  }
+  FieldListener  {
+    listenField = ADCSeriesPath
+    command = SetADCPath
+  }
+  FieldListener  {
+    listenField = MarkingProstate
+    command = SetMarkingProstate
+  }
+  FieldListener  {
+    listenField = MarkingLesion
+    command = SetMarkingLesion  
+  }
+  FieldListener  {
+    listenField = MarkingRectum
+    command = SetMarkingRectum
+  }
+  FieldListener  {
+    listenField = DisplayProstate
+    command = SetDisplayProstate
+  }
+  FieldListener  {
+    listenField = DisplayLesion
+    command = SetDisplayLesion
+  }
+  FieldListener  {
+    listenField = DisplayRectum
+    command = SetDisplayRectum
+  }
+  FieldListener  {
+    listenField = ProstateFaceAlpha
+    command = SetProstateAlpha
+  }
+  FieldListener  {
+    listenField = LesionFaceAlpha
+    command = SetLesionAlpha
+  }
+  FieldListener  {
+    listenField = RectumFaceAlpha
+    command = SetRectumAlpha
+  }
+}
+
+Window {
+  Splitter {
+    direction = horizontal
+    Splitter {
+      direction = vertical
+      Horizontal {
+        Viewer SynchroView2D.renderArea1 {
+          clone = True
+          width = 500
+          height = 500
+        }
+        Viewer SynchroView2D.renderArea2 {
+          width = 500
+          height = 500
+        }
+      }
+      Horizontal {
+        Viewer View2D.self {
+          type = SoRenderArea
+        }
+        Viewer SoExaminerViewer.self {
+          type = SoExaminerViewer
+        }
+      }
+    }
+    Vertical {
+      //path and patientID
+      Box Generate3D {
+        title = "Generate 3D"
+        Field PatientDataDirectory {
+          browseButton = True
+          browseMode = directory
+        }
+        Field DestinationDataDirectory {
+          browseButton = True
+          browseMode = directory
+        }
+        Field PatientID {}
+        Button  {
+          title = "Confirm"
+          command = Generate3dFile
+        }
+      }
+      //mark
+      Box MarkLabel {
+        title = "Mark Label"
+        Horizontal {
+          Button  {
+            title = "Load Image"
+            command = LoadImage
+          }
+          Button  {
+            title = "Initialize Path"
+            command = InitializePath
+          }
+          Button  {
+            title = "Initialize Label"
+            command = InitializeLabel
+          }
+          Button  {
+            title = "test"
+            command = Test
+          }
+        }
+        Field T2SeriesPath {
+          title = "T2 Series Path"
+          browseButton = True
+          browseMode = open
+        }
+        Field ADCSeriesPath {
+          title = "ADC Series Path"
+          browseButton = True
+          browseMode = open
+        }
+        Horizontal {
+          Label {
+            title = "Prostate"
+          }
+          Field MarkingProstate {
+            title = "show cso"
+          }
+          Button  {
+            title = "Generate"
+            command = GenerateProstate 
+          }
+          Button  {
+            title = "Delete"
+            command = DeleteProstate 
+          }
+          Field DisplayProstate {
+            title = "Display"
+          }
+          Button  {
+            title = "Save"
+            command = SaveProstate
+          }
+        }
+        Horizontal {
+          Label {
+            title = "Lesion"
+          }
+          Field MarkingLesion {
+            title="show cso"
+          }
+          Button  {
+            title = "Generate"
+            command = GenerateLesion 
+          }
+          Button  {
+            title = "Delete"
+            command = DeleteLesion 
+          }
+          Field DisplayLesion {
+            title = "Display"
+          }
+          Button  {
+            title = "save"
+            command = SaveLesion
+          }
+        }
+        //TODO
+        Horizontal {
+          Label {
+            title = "Rectum"
+          }
+          Field RectumReverse {
+            title = " reverse"
+          }
+          Field MarkingRectum {
+            title = "show cso"
+          }
+          Button  {
+            title = "Generate"
+            command = GenerateRectum 
+          }
+          Button  {
+            title = "Delete"
+            command = DeleteRectum
+          }
+          Field DisplayRectum {
+            title = "Display"
+          }
+          Button  {
+            title = "Save"
+            command = SaveRectum
+          }
+        }
+      }
+      //view setting
+      Box View3D {
+        title = "View 3D"
+        Vertical {
+          Horizontal {
+            spacing = 3
+            Label {
+              title = "Prostate"
+            }
+            Slider ProstateFaceAlpha {
+              direction = Horizontal
+            }
+            NumberEdit ProstateFaceAlpha {
+              step = 0.1
+              stepstep = 1
+              format = "%.3f"
+            }
+          }
+          Horizontal {
+            spacing = 3
+            Label {
+              title = "Lesion  "
+            }
+            Slider LesionFaceAlpha {
+              direction = Horizontal
+            }
+            NumberEdit LesionFaceAlpha {
+              step = 0.1
+              stepstep = 1
+              format = "%.3f"
+            }
+          }
+          Horizontal {
+            spacing = 3
+            Label {
+              title = "Rectum  "
+            }
+            Slider RectumFaceAlpha {
+              direction = Horizontal
+            }
+            NumberEdit RectumFaceAlpha {
+              step = 0.1
+              stepstep = 1
+              format = "%.3f"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
