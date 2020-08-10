@@ -2,35 +2,58 @@
 network  {
   watchlist = ""
 }
-module FieldIterator {
+module Info {
   internal  {
-    frame = "5729 797 96 56"
-    moduleGroupName = ""
+    frame = "4265 861 64 56"
+    moduleGroupName = findLargestSection
+    windows  {
+      window _default {
+        geometry = "625 381 686 393"
+        sizeHint = "686 393"
+        wasOpen = no
+        wasActive = no
+      }
+    }
   }
   fields  {
-    instanceName = FieldIterator
-    fieldNames = ""
-    fieldValues = ""
-    fieldSeparator = [,;]
-    valueSeparator = "\\n\\r|\\r\\n|[\\n\\r\\\\]"
-    valueHeader = FALSE
-    numValues = 0
-    indexTranslation = 0
-    curIndex = -1
-    curValue = ""
-    newValueEnable = FALSE
-    verbose = FALSE
-    delay = 1
-    loop = FALSE
-    running = FALSE
-    autoReset = FALSE
+    instanceName = Info4
+    bypassIndex = -1
+    inPlaceIndex = -1
   }
-  internalFields = ""
+}
+module WorldVoxelConvert {
+  internal  {
+    frame = "4537 893 144 56"
+    moduleGroupName = findLargestSection
+    windows  {
+      window _default {
+        geometry = "746 450 477 250"
+        sizeHint = "477 250"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WorldVoxelConvert1
+    voxelX = 156.8125
+    voxelY = 210.3125
+    voxelZ = 3.4999995
+    worldX = 156.8125
+    worldY = 210.3125
+    worldZ = 3.4999995
+    voxelPos = "156.8125 210.3125 3.49999952316284"
+    worldPos = "156.8125 210.3125 3.49999952316284"
+    voxelMode = TRUE
+    worldMode = FALSE
+    intVoxelCoords = FALSE
+    keepConstant = Voxel
+  }
 }
 module View2DExtensions {
   internal  {
-    frame = "5477 965 136 56"
-    moduleGroupName = ""
+    frame = "4829 789 136 56"
+    moduleGroupName = findLargestSection
     windows  {
       window _default {
         geometry = "550 188 837 779"
@@ -160,9 +183,9 @@ LUT C/W: $(input07) / $(input08)"
     annoInput08 = 1
     annoInput09 = HU
     annoMouseOn = TRUE
-    annoReadPixFloorPos = "154 11 0"
-    annoReadPixVoxelPos = "154.271102905273 11.8670082092285 0.5"
-    annoReadPixWorldPos = "-17.1110000610352 -6.44124794006348 -79.5582504272461"
+    annoReadPixFloorPos = "230 6 0"
+    annoReadPixVoxelPos = "230.792831420898 6.21994876861572 0.5"
+    annoReadPixWorldPos = "67.7713928222656 145.075485229492 -62.3816146850586"
     borderOn = TRUE
     borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
     borderWidth = 1
@@ -175,11 +198,11 @@ LUT C/W: $(input07) / $(input08)"
 }
 module View2D {
   internal  {
-    frame = "5493 885 120 56"
-    moduleGroupName = ""
+    frame = "4845 717 120 56"
+    moduleGroupName = findLargestSection
     windows  {
       window _default {
-        geometry = "881 454 400 400"
+        geometry = "928 364 400 400"
         sizeHint = "400 400"
         wasOpen = no
         wasActive = no
@@ -196,7 +219,7 @@ module View2D {
     instanceName = View2D5
     inventorInputOn = TRUE
     view2DExtensionsOn = TRUE
-    startSlice = 0
+    startSlice = -1
     numSlices = 1
     numXSlices = 1
     sliceStep = 1
@@ -232,18 +255,18 @@ module View2D {
     borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
     valueHighPrecision = TRUE
     maxPrecision = 4
-    plane = "0 0 1 -79.5582504272461"
+    plane = "0.0292038284242153 -0.0175222977995872 -0.999419867992401 73.3825988769531"
   }
   internalFields = ""
 }
 module ImageStatistics {
   internal  {
-    frame = "4973 717 120 56"
-    moduleGroupName = ""
+    frame = "4365 725 120 56"
+    moduleGroupName = findLargestSection
     windows  {
       window _default {
-        geometry = "720 266 514 623"
-        sizeHint = "514 623"
+        geometry = "720 266 496 623"
+        sizeHint = "496 623"
         wasOpen = no
         wasActive = no
       }
@@ -253,7 +276,7 @@ module ImageStatistics {
     instanceName = ImageStatistics
     innerMin = 0.5
     innerMax = 2
-    autoUpdate = FALSE
+    autoUpdate = TRUE
     perSlice = FALSE
     currentSlice = 0
     lowerWidth = 0
@@ -263,8 +286,8 @@ module ImageStatistics {
 }
 module View2D {
   internal  {
-    frame = "4805 741 120 56"
-    moduleGroupName = ""
+    frame = "4197 733 120 56"
+    moduleGroupName = findLargestSection
     windows  {
       window _default {
         geometry = "768 377 400 400"
@@ -278,7 +301,7 @@ module View2D {
     instanceName = View2D3
     inventorInputOn = TRUE
     view2DExtensionsOn = TRUE
-    startSlice = 0
+    startSlice = -1
     numSlices = 1
     numXSlices = 1
     sliceStep = 1
@@ -314,14 +337,14 @@ module View2D {
     borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
     valueHighPrecision = TRUE
     maxPrecision = 4
-    plane = "0.00608203001320362 -0.0425742082297802 -0.999074816703796 71.1549224853516"
+    plane = "0 0 1 -79.5582504272461"
   }
   internalFields = ""
 }
 module ComposePlane {
   internal  {
-    frame = "5141 821 120 56"
-    moduleGroupName = ""
+    frame = "4533 813 120 56"
+    moduleGroupName = findLargestSection
     windows  {
       window _default {
         geometry = "824 290 375 97"
@@ -333,15 +356,15 @@ module ComposePlane {
   }
   fields  {
     instanceName = ComposePlane1
-    point = "-15.8572463989258 103.039810180664 -75.708251953125"
-    normal = "-0.5625 3.9375 92.4000015258789"
-    plane = "-0.00608202990040408 0.0425742093028285 0.999074794804938 -71.1549235932173"
+    point = "-15.2947463989258 104.727310180664 -75.708251953125"
+    normal = "-2.8125 1.6875 96.2500019073486"
+    plane = "-0.0292038272161814 0.0175222963297089 0.999419884536655 -73.3826043315157"
   }
 }
 module MPR {
   internal  {
-    frame = "4993 821 80 56"
-    moduleGroupName = ""
+    frame = "4385 813 80 56"
+    moduleGroupName = findLargestSection
     windows  {
       window _default {
         geometry = "211 316 547 597"
@@ -359,9 +382,9 @@ module MPR {
   }
   fields  {
     instanceName = MPR
-    rotation = "0.950625660961548 -0.226934700828014 -0.211687255831617 1.58020621062797"
-    translation = "-15.8572463989258 103.039810180664 -75.708251953125"
-    plane = "-0.00608202990040408 0.0425742093028285 0.999074794804938 -71.1549235932173"
+    rotation = "-0.72823615301826 0.499242009505084 0.469499224048871 4.39861695611377"
+    translation = "-15.2947463989258 104.727310180664 -75.708251953125"
+    plane = "-0.0292038272161814 0.0175222963297089 0.999419884536655 -73.3826043315157"
     enablePlaneEdit = TRUE
     fillValue = 0
     fieldOfView = 150
@@ -388,8 +411,8 @@ module MPR {
 }
 module itkImageFileReader {
   internal  {
-    frame = "4961 949 144 56"
-    moduleGroupName = ""
+    frame = "4353 941 144 56"
+    moduleGroupName = findLargestSection
     windows  {
       window _default {
         geometry = "826 473 402 208"
@@ -404,141 +427,8 @@ module itkImageFileReader {
     fileDataType = int16
     correctSubVoxelShift = FALSE
     fileDimension = 3
-    info = "Loading okay."
+    info = "Invalid path"
     unresolvedFileName = ""
-  }
-}
-module SoMLWorldToVoxel {
-  internal  {
-    frame = "4533 941 136 56"
-    moduleGroupName = centerline
-  }
-  fields  {
-    instanceName = SoMLWorldToVoxel
-    matrix = "1 0 0 0
-0 1 0 0
-0 0 1 0
-0 0 0 1"
-    inverse = FALSE
-    shift = FALSE
-  }
-}
-module ComposePlane {
-  internal  {
-    frame = "4125 861 120 56"
-    moduleGroupName = centerline
-    windows  {
-      window _default {
-        geometry = "956 412 375 97"
-        sizeHint = "375 97"
-        wasOpen = no
-        wasActive = no
-      }
-    }
-  }
-  fields  {
-    instanceName = ComposePlane
-    point = "-16.9822463989258 104.727310180664 -75.708251953125"
-    normal = "0.5625 1.6875 100.100002288818"
-    plane = "0.00561849347278936 0.0168554804183681 0.999842150197201 -74.0264869350111"
-  }
-}
-module OrthoView2D {
-  internal  {
-    frame = "4269 685 120 56"
-    moduleGroupName = centerline
-    windows  {
-      window _default {
-        geometry = "736 163 400 431"
-        sizeHint = "400 431"
-        wasOpen = no
-        wasActive = no
-      }
-    }
-  }
-  fields  {
-    instanceName = OrthoView2D1
-    inventorInputOn = TRUE
-    layout = LAYOUT_CUBE_EQUAL
-    filterMode = FILTER_LINEAR
-    synchronizeZoom = TRUE
-    synchronizePanning = FALSE
-    synchronizePosition = TRUE
-    useGlobalInputImage = TRUE
-    snapToCenter = FALSE
-    alternCubeLayout = FALSE
-    timePoint = 0
-    borderOn = TRUE
-    borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
-    greyWidth = 1
-    greyCenter = 0.5
-    annotationOn = TRUE
-    annotationSizeMode = ANNO_SHOW_SHORT
-    annotationFontSize = ANNO_SIZE_AUTO
-    valueHighPrecision = FALSE
-    annoCoords = Voxel
-    showCurrentPos = FALSE
-    worldPosition = "56.1114883422852 113.164810180664 -22.105354309082"
-    coloredMode = FALSE
-  }
-  internalFields = ""
-}
-module SoView2DPlane {
-  internal  {
-    frame = "4353 861 128 56"
-    moduleGroupName = centerline
-    windows  {
-      window _default {
-        geometry = "1084 507 504 471"
-        sizeHint = "504 471"
-        wasOpen = no
-        wasActive = no
-      }
-    }
-  }
-  fields  {
-    instanceName = SoView2DPlane2
-    drawingOn = TRUE
-    editingOn = TRUE
-    maskValid = FALSE
-    fixZOn = TRUE
-    color = "1 0.921568989753723 0.0549019984900951"
-    selectionTolerance = 4
-    needsValidVoxel = TRUE
-    button1 = PRESSED
-    button2 = IGNORED
-    button3 = IGNORED
-    shift = IGNORED
-    control = IGNORED
-    alt = IGNORED
-    wantsAllEvents = FALSE
-    wantsKeyEvents = FALSE
-    wantsMouseWheelEvents = FALSE
-    setEventHandled = FALSE
-    ignoreHandledEvents = FALSE
-    createNewMode = FALSE
-    renderOnSlab = FALSE
-    clipToSlice = TRUE
-    cursorShape = UNDEFINED_CURSOR
-    plane = "0.00561849353834987 0.0168554801493883 0.999842166900635 -74.0264892578125"
-    maskValidAndHit = FALSE
-    blendMin = 0.1
-    blendMax = 1
-    useTranslationRange = FALSE
-    translationRangeMin = -1
-    translationRangeMax = 1
-    normalOn = FALSE
-    externalRotationAxisOn = FALSE
-    externalRotationAxis = "0 0 0"
-    normalSize = 10
-    normalOffset = 0
-    rotationDifference = "0.999590337276459 0 -0.0286209285259247 0
-0 1 0 0
-0.0286209285259247 0 0.999590337276459 0
-0 0 0 1"
-    translationLineFraction = 0.5
-    fixedLineWidth = FALSE
-    interactionMode = BOTH
   }
 }
 module OrthoTriplePlaneViewer {
@@ -557,8 +447,8 @@ module OrthoTriplePlaneViewer {
   fields  {
     instanceName = OrthoTriplePlaneViewer
     inventorInputOn = FALSE
-    plane1 = "0 1.10196151581476e-05 -1 23.7340984344482"
-    plane2 = "0 -1 -7.34641025701421e-06 -76.8833847045898"
+    plane1 = "0 1.10196151581476e-05 -1 418.7978515625"
+    plane2 = "0 -1 -7.34641025701421e-06 193.38508605957"
     plane3 = "1 1.34925404182695e-11 -5.19469631399261e-06 -13.888373374939"
     color1 = "1 0 0"
     color2 = "0 0.945097982883453 0"
@@ -616,46 +506,29 @@ module DtfSkeletonization {
     skeletonOnly = TRUE
   }
 }
-module itkImageFileReader {
+module WorldVoxelConvert {
   internal  {
-    frame = "4193 941 144 56"
-    moduleGroupName = centerline
+    frame = "4525 733 136 56"
+    moduleGroupName = findLargestSection
     windows  {
       window _default {
-        geometry = "852 478 402 208"
-        sizeHint = "402 208"
+        geometry = "344 481 477 250"
+        sizeHint = "477 250"
         wasOpen = no
         wasActive = no
       }
     }
   }
   fields  {
-    instanceName = itkImageFileReader4
-    fileDataType = int16
-    correctSubVoxelShift = FALSE
-    fileDimension = 3
-    info = " Could not create IO object for file D:/study/summer_break/data/water_film/rectum_center/211_rectum.nii
-The file doesn't exist. 
-Filename = D:/study/summer_break/data/water_film/rectum_center/211_rectum.nii
- Loaded data may be undefined."
-    unresolvedFileName = D:/study/summer_break/data/water_film/rectum_center/211_rectum.nii
-  }
-}
-module WorldVoxelConvert {
-  internal  {
-    frame = "5317 821 136 56"
-    moduleGroupName = ""
-  }
-  fields  {
     instanceName = WorldVoxelConvert
-    voxelX = 0
-    voxelY = 0
+    voxelX = 186
+    voxelY = 155
     voxelZ = 0
-    worldX = 0
-    worldY = 0
+    worldX = 186
+    worldY = 155
     worldZ = 0
-    voxelPos = "0 0 0"
-    worldPos = "0 0 0"
+    voxelPos = "186 155 0"
+    worldPos = "186 155 0"
     voxelMode = TRUE
     worldMode = FALSE
     intVoxelCoords = FALSE
@@ -693,7 +566,7 @@ module View3D {
     greyWidth = 0.66500002
     camType = TRUE
     camPosition = "218.994827270508 203.125961303711 -237.264312744141"
-    camOrientation = "0.610980689525604 0.676499247550964 0.411158561706543 2.85318970680237"
+    camOrientation = "0.610980570316315 0.676499247550964 0.411158740520477 2.85318970680237"
     initialCameraOrientation = CAMERA_KEEP_AS_IS
     camFar = 473.46042
     camNear = 207.29681
@@ -816,69 +689,31 @@ module MarkerListInspector {
   }
   fields  {
     instanceName = MarkerListInspector
-    textViewer = "[(-16.9822 104.727 -75.7083),
-(-16.4197 104.727 -75.7083),
-(-15.8572 104.727 -75.7083),
-(-15.0135 104.727 -75.7083),
-(-13.6776 104.727 -75.7083),
-(-12.6404 104.727 -75.7083),
-(-11.9593 104.727 -75.7083),
-(-11.3671 104.727 -75.7083),
-(-11.7816 104.868 -75.7083),
-(-13.2915 105.184 -75.7083),
-(-13.5283 105.263 -74.7458),
-(-14.5719 105.283 -71.6176),
-(-15.114 105.288 -67.9481),
-(-15.9527 105.149 -64.1432),
-(-16.8655 104.973 -61.267),
-(-16.2499 105.07 -59.5854),
-(-16.5179 104.954 -57.24),
-(-15.7412 105.065 -55.6912),
-(-16.2501 104.812 -53.379),
-(-15.6742 104.889 -52.8009),
-(-15.9521 105.049 -51.6939),
-(-16.3028 104.948 -48.5297),
-(-16.6718 105.204 -44.8511),
-(-17.1859 105.268 -42.0065),
-(-17.3144 105.284 -40.3328),
-(-17.6278 105.288 -37.9894),
-(-17.7061 105.43 -36.441),
-(-18.7101 105.747 -34.1289),
-(-18.1173 105.826 -33.5509),
-(-16.7035 105.846 -32.4439),
-(-16.0688 105.991 -29.2797),
-(-16.332 106.309 -25.6011),
-(-17.1009 106.388 -22.7565),
-(-16.8713 106.408 -22.0453),
-(-16.9545 106.413 -20.905),
-(-17.2566 106.414 -18.6949),
-(-16.0665 106.274 -17.1799),
-(-15.6283 105.958 -13.9137),
-(-15.8 105.879 -10.2096),
-(-15.8429 105.859 -6.39609),
-(-16.9787 105.995 -2.55521),
-(-19.372 106.31 0.33001),
-(-19.5484 106.389 1.05131),
-(-19.1707 106.408 1.23164),
-(-18.6544 106.413 1.27672),
-(-18.1034 106.414 1.28799),
-(-17.5438 106.415 1.29081),
-(-16.982 106.415 1.29151),
-(-16.5603 106.415 2.25419),
-(-17.158 106.555 5.38236),
-(-18.5731 106.872 8.0894),
-(-18.505 106.951 8.76616),
-(-17.7848 106.971 8.93535),
-(-17.0423 106.976 9.94015),
-(-17.2785 106.977 12.1164),
-(-17.0563 106.977 13.6229),
-(-17.1414 106.837 16.887),
-(-17.8658 106.52 20.5906),
-(-18.75 106.441 23.4415),
-(-18.5492 106.421 24.1542),
-(-17.9365 106.416 24.3324),
-(-17.0802 106.415 24.3769),
-(-16.4197 106.415 24.3918)]"
+    textViewer = "[(-16.4197 104.727 -64.1583),
+(-16.5604 104.727 -61.2708),
+(-16.033 104.727 -59.5864),
+(-16.3231 104.868 -57.2403),
+(-16.8175 105.184 -55.6913),
+(-16.0973 105.263 -52.4165),
+(-15.9173 105.283 -48.7103),
+(-15.8722 105.429 -44.8963),
+(-15.861 105.746 -41.0553),
+(-15.9988 105.826 -37.2075),
+(-16.3145 105.846 -33.3581),
+(-16.3934 105.851 -29.5082),
+(-16.4132 105.852 -25.6582),
+(-16.4181 105.852 -21.8082),
+(-16.56 105.852 -17.9583),
+(-16.8767 105.852 -14.1083),
+(-16.9559 105.852 -10.2583),
+(-17.1163 105.852 -6.40825),
+(-17.4376 105.852 -2.55825),
+(-17.6586 105.993 1.29175),
+(-17.9951 106.169 5.14175),
+(-18.0792 105.931 8.99175),
+(-18.1002 105.872 12.8417),
+(-18.1055 105.998 16.6917),
+(-18.1072 106.415 20.5417)]"
     updateMode = AutoUpdate
     showIndices3D = FALSE
     scaleSize = 4.5
@@ -891,7 +726,7 @@ module MarkerListInspector {
     hide3DView = TRUE
     numMarkers = 29
     selMarker = -1
-    markerPosition = "-16.4197463989258 106.977310180664 16.6917495727539"
+    markerPosition = "0 0 0"
     markerVector = "0 0 0"
     currentMarker = 28
     currentType = 0
@@ -1096,7 +931,7 @@ module View2D {
     instanceName = View2D4
     inventorInputOn = TRUE
     view2DExtensionsOn = TRUE
-    startSlice = 0
+    startSlice = -1
     numSlices = 1
     numXSlices = 1
     sliceStep = 1
@@ -1154,7 +989,10 @@ module itkImageFileReader {
     fileDataType = int16
     correctSubVoxelShift = FALSE
     fileDimension = 3
-    info = "Loading okay."
+    info = " Could not create IO object for file D:/study/summer_break/data/water_film/temp/211_original.nii
+The file doesn't exist. 
+Filename = D:/study/summer_break/data/water_film/temp/211_original.nii
+ Loaded data may be undefined."
     unresolvedFileName = D:/study/summer_break/data/water_film/temp/211_original.nii
   }
 }
@@ -1164,8 +1002,8 @@ module SoWEMRenderer {
     moduleGroupName = 3dviewer
     windows  {
       window _default {
-        geometry = "798 373 339 394"
-        sizeHint = "339 394"
+        geometry = "798 373 421 446"
+        sizeHint = "421 446"
         wasOpen = no
         wasActive = no
       }
@@ -1216,8 +1054,8 @@ module SoWEMRenderer {
     useEdgeColoringMode = FALSE
     nodeRenderingMode = WEM_NODE_RENDERING_NORMAL
     boundingBoxMode = WEM_BOUNDING_BOX_AXIS_ALIGNED
-    primitiveValueLists = LUT
-    selectedPrimitiveValueList = LUT
+    primitiveValueLists = ""
+    selectedPrimitiveValueList = ""
     primitiveValueListValid = TRUE
     selectedTab = 0
   }
@@ -1363,8 +1201,8 @@ module WEMSave {
     moduleGroupName = 3dviewer
     windows  {
       window _default {
-        geometry = "734 490 466 161"
-        sizeHint = "466 161"
+        geometry = "734 490 559 181"
+        sizeHint = "559 181"
         wasOpen = no
         wasActive = no
       }
@@ -1378,10 +1216,10 @@ module WEMSave {
     listenToFinishingNotifications = FALSE
     listenToRepaintNotifications = FALSE
     listenToSelectionChangedNotifications = FALSE
-    filename = "D:/study/summer_break/data/water_film\\214\\obj\\214_rectum.nii"
+    filename = "D:/study/summer_break/data/water_film\\213\\obj\\213_rectum.nii"
     fileType = "Wavefront (.obj)"
     inWEMValid = TRUE
-    status = "WEM saved to file."
+    status = "Valid WEM connected"
   }
 }
 module CSOConvertTo3DMask {
@@ -1492,7 +1330,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = int16
-    info = "File saved successfully"
+    info = ""
     unresolvedFileName = ""
   }
 }
@@ -1570,8 +1408,8 @@ module WEMSave {
     moduleGroupName = 3dviewer
     windows  {
       window _default {
-        geometry = "734 490 466 161"
-        sizeHint = "466 161"
+        geometry = "734 490 559 181"
+        sizeHint = "559 181"
         wasOpen = no
         wasActive = no
       }
@@ -1585,7 +1423,7 @@ module WEMSave {
     listenToFinishingNotifications = FALSE
     listenToRepaintNotifications = FALSE
     listenToSelectionChangedNotifications = FALSE
-    filename = "D:/study/summer_break/data/water_film\\217\\obj\\217_lesion.obj"
+    filename = "D:/study/summer_break/data/water_film\\213\\obj\\213_lesion.obj"
     fileType = "Wavefront (.obj)"
     inWEMValid = TRUE
     status = "Valid WEM connected"
@@ -1612,10 +1450,10 @@ module WEMSave {
     listenToFinishingNotifications = FALSE
     listenToRepaintNotifications = FALSE
     listenToSelectionChangedNotifications = FALSE
-    filename = "D:/study/summer_break/data/water_film\\214\\obj\\214_prostate.obj"
+    filename = "D:/study/summer_break/data/water_film\\213\\obj\\213_prostate.obj"
     fileType = "Wavefront (.obj)"
     inWEMValid = TRUE
-    status = "WEM saved to file."
+    status = "Valid WEM connected"
   }
 }
 module View2D {
@@ -1635,7 +1473,7 @@ module View2D {
     instanceName = View2D2
     inventorInputOn = TRUE
     view2DExtensionsOn = TRUE
-    startSlice = 0
+    startSlice = -1
     numSlices = 1
     numXSlices = 1
     sliceStep = 1
@@ -1691,12 +1529,12 @@ module ImageSave {
   fields  {
     instanceName = ImageSave1
     taskVerboseLogging = FALSE
-    filename = "D:/study/summer_break/data/water_film\\214\\raw\\214_original.raw"
+    filename = "D:/study/summer_break/data/water_film\\213\\raw\\213_original.raw"
     format = RAW
     comment = MeVisLab
     allowOverwrite = TRUE
     autoFilename = FALSE
-    sourceName = "D:/study/summer_break/data/water_film\\214\\dcm3D\\______SHUI_2117839_0014.dcm"
+    sourceName = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0014.dcm"
     postfix = .result1
     dicomNameUsed = TRUE
     dicomMetaHeader = TRUE
@@ -1922,7 +1760,10 @@ module itkImageFileReader {
     fileDataType = int8
     correctSubVoxelShift = FALSE
     fileDimension = 3
-    info = "File closed"
+    info = " Could not create IO object for file E:/study/prostate/data/caoguangyou/result/nii_int8/MR397548_rectum.nii
+The file doesn't exist. 
+Filename = E:/study/prostate/data/caoguangyou/result/nii_int8/MR397548_rectum.nii
+ Loaded data may be undefined."
     unresolvedFileName = E:/study/prostate/data/caoguangyou/result/nii_int8/MR397548_rectum.nii
   }
 }
@@ -1969,8 +1810,8 @@ module itkImageFileReader {
     fileDataType = "unsigned int8"
     correctSubVoxelShift = FALSE
     fileDimension = 3
-    info = "File closed"
-    unresolvedFileName = E:/study/prostate/data/caoguangyou/result/nii_int8/MR397548_rectum_skeleton.nii
+    info = "Invalid path"
+    unresolvedFileName = ""
   }
 }
 module View2D {
@@ -1990,7 +1831,7 @@ module View2D {
     instanceName = View2D1
     inventorInputOn = TRUE
     view2DExtensionsOn = TRUE
-    startSlice = 0
+    startSlice = -1
     numSlices = 1
     numXSlices = 1
     sliceStep = 1
@@ -2049,8 +1890,8 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = "unsigned int8"
-    info = "File saved successfully"
-    unresolvedFileName = E:/study/prostate/data/prostate_waterfilm/result/nii_int8/2117839_rectum.nii
+    info = ""
+    unresolvedFileName = ""
   }
 }
 module itkImageFileReader {
@@ -2071,8 +1912,8 @@ module itkImageFileReader {
     fileDataType = int16
     correctSubVoxelShift = FALSE
     fileDimension = 3
-    info = "File closed"
-    unresolvedFileName = E:/study/prostate/data/prostate_waterfilm/result/nii/2117839_rectum.nii
+    info = "Invalid path"
+    unresolvedFileName = ""
   }
 }
 module ImageSave {
@@ -2091,7 +1932,7 @@ module ImageSave {
   fields  {
     instanceName = ImageSave
     taskVerboseLogging = FALSE
-    filename = "D:/study/summer_break/data/water_film\\214\\raw\\214_rectum.raw"
+    filename = "D:/study/summer_break/data/water_film\\213\\raw\\213_rectum.raw"
     format = RAW
     comment = MeVisLab
     allowOverwrite = TRUE
@@ -2118,25 +1959,6 @@ module ImageSave {
     jpegQuality = 75
     jpegProgressive = FALSE
   }
-}
-module TestHorizontalLayout {
-  internal  {
-    frame = "2361 437 144 56"
-    moduleGroupName = ""
-    windows  {
-      window _default {
-        geometry = "722 556 491 29"
-        sizeHint = "491 29"
-        wasOpen = no
-        wasActive = no
-      }
-    }
-  }
-  fields  {
-    instanceName = TestHorizontalLayout
-    FDouble = 2.12
-  }
-  internalFields = ""
 }
 module SoExaminerViewer {
   internal  {
@@ -2210,10 +2032,10 @@ module SoExaminerViewer {
     stereoViewing = FALSE
     stereoOffset = 3
     height = 128.18929
-    position = "-31.7209243774414 83.1416320800781 0.839013576507568"
-    orientation = "-0.761185884475708 -0.0694337263703346 0.644806146621704 2.76027488708496"
-    nearDistance = -28.178558
-    farDistance = 52.056461
+    position = "-30.2719230651855 63.8923797607422 8.24601173400879"
+    orientation = "-0.631482243537903 -0.241138577461243 0.73694121837616 3.14204859733582"
+    nearDistance = -15.748168
+    farDistance = 62.322735
     focalDistance = 34.831348
     forceRedrawOnInteraction = FALSE
     button1events = TO_VIEWER
@@ -2509,7 +2331,7 @@ module SoWEMRenderer {
     useEdgeColoringMode = FALSE
     nodeRenderingMode = WEM_NODE_RENDERING_NORMAL
     boundingBoxMode = WEM_BOUNDING_BOX_AXIS_ALIGNED
-    primitiveValueLists = LUT
+    primitiveValueLists = ""
     selectedPrimitiveValueList = LUT
     primitiveValueListValid = TRUE
     selectedTab = 0
@@ -2674,7 +2496,7 @@ module SynchroView2D {
     disconnectOnHide = TRUE
     snapToCenter1 = FALSE
     snapToCenter2 = FALSE
-    slice1 = 29
+    slice1 = 26
     slice2 = 0
     timepoint1 = 0
     timepoint2 = 0
@@ -2688,7 +2510,7 @@ module SynchroView2D {
     background = "0 0 0"
     borderOn = FALSE
     showCurrentPos = FALSE
-    worldPosition = "-5.45671844482422 112.443641662598 32.0917434692383"
+    worldPosition = "-4.72351837158203 113.543441772461 32.0917434692383"
   }
   internalFields = ""
 }
@@ -2752,8 +2574,8 @@ module ImageLoad {
     moduleGroupName = ""
     windows  {
       window _default {
-        geometry = "818 415 298 311"
-        sizeHint = "298 311"
+        geometry = "818 415 353 353"
+        sizeHint = "353 353"
         wasOpen = no
         wasActive = no
       }
@@ -2761,7 +2583,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad2
-    filename = "D:/study/summer_break/data/water_film\\214\\dcm3D\\______SHUI_2117839_0015.dcm"
+    filename = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0015.dcm"
     autoLoad = TRUE
     readRaw = FALSE
     rawX = 1
@@ -2806,7 +2628,7 @@ module DicomTagViewer {
     maxValueLen = 80
     showPrivateTags = FALSE
     tagListSubset = AllTags
-    dicomFile = "D:/study/summer_break/data/water_film\\214\\dcm3D\\______SHUI_2117839_0015.dcm"
+    dicomFile = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0015.dcm"
     trimSpaces = FALSE
   }
 }
@@ -2837,7 +2659,7 @@ module DicomTagViewer {
     maxValueLen = 80
     showPrivateTags = FALSE
     tagListSubset = AllTags
-    dicomFile = "D:/study/summer_break/data/water_film\\214\\dcm3D\\______SHUI_2117839_0014.dcm"
+    dicomFile = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0014.dcm"
     trimSpaces = FALSE
   }
 }
@@ -2924,7 +2746,7 @@ world_mat(1:3,4) = t"
     scalar5 = 0
     numberOfStrings = 1
     stringName0 = dcm_path
-    string0 = "D:/study/summer_break/data/water_film\\214\\dcm3D\\______SHUI_2117839_0014.dcm"
+    string0 = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0014.dcm"
     stringName1 = string1
     string1 = ""
     stringName2 = string2
@@ -2986,7 +2808,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad
-    filename = "D:/study/summer_break/data/water_film\\214\\dcm3D\\______SHUI_2117839_0014.dcm"
+    filename = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0014.dcm"
     autoLoad = TRUE
     readRaw = FALSE
     rawX = 1
@@ -3312,7 +3134,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = int16
-    info = "File saved successfully"
+    info = ""
     unresolvedFileName = E:/study/summer_break/data/test/test3.nii
   }
 }
@@ -3348,7 +3170,7 @@ module SoView2DOverlay {
   }
   fields  {
     instanceName = SoView2DOverlay1
-    drawingOn = FALSE
+    drawingOn = TRUE
     editingOn = TRUE
     maskValid = TRUE
     fixZOn = TRUE
@@ -3391,8 +3213,8 @@ module itkImageFileWriter {
     moduleGroupName = ""
     windows  {
       window _default {
-        geometry = "827 375 357 390"
-        sizeHint = "357 390"
+        geometry = "827 375 447 413"
+        sizeHint = "447 413"
         wasOpen = no
         wasActive = no
       }
@@ -3404,7 +3226,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = Automatic
-    info = "File saved successfully"
+    info = ""
     unresolvedFileName = ""
   }
 }
@@ -3431,7 +3253,7 @@ module View2D {
     instanceName = View2D
     inventorInputOn = TRUE
     view2DExtensionsOn = TRUE
-    startSlice = 16
+    startSlice = 0
     numSlices = 1
     numXSlices = 1
     sliceStep = 1
@@ -3467,7 +3289,7 @@ module View2D {
     borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
     valueHighPrecision = TRUE
     maxPrecision = 4
-    plane = "0 0 1 -17.9582557678223"
+    plane = "0 0 1 -79.5582504272461"
   }
   internalFields = ""
 }
@@ -3620,7 +3442,7 @@ module CSOInspector {
     instanceName = CSOInspector
     markerSizeScaling = 1
     continuousUpdate = FALSE
-    numCSOs = 8
+    numCSOs = 0
     numGroups = 0
     useDecoration = FALSE
     showBackground = TRUE
@@ -3736,7 +3558,7 @@ module CSOManager {
     listSingleRemoveEmptyGroupHandling = RemoveAlways
     listDefaultRemoveEmptyGroupHandling = RemoveAlways
     enableUndoRedo = TRUE
-    numUndos = 9
+    numUndos = 0
     numRedos = 0
     undoStackLimit = 16
     useSelectionCSONotification = FALSE
@@ -3753,7 +3575,7 @@ module CSOManager {
     enableRepaintNotification = TRUE
     csoTreeView = ""
     groupTreeView = ""
-    numCSOs = 8
+    numCSOs = 12
     numGroups = 0
     numSelectedCSOs = 0
     numSelectedGroups = 0
@@ -3896,8 +3718,8 @@ module DicomImport {
     moduleGroupName = ""
     windows  {
       window _default {
-        geometry = "709 470 516 201"
-        sizeHint = "516 201"
+        geometry = "709 470 516 236"
+        sizeHint = "516 236"
         wasOpen = no
         wasActive = no
       }
@@ -3906,26 +3728,26 @@ module DicomImport {
   fields  {
     instanceName = DicomImport
     source = D:/study/summer_break/data/water_film/dcm_folders
-    target = "D:/study/summer_break/data/water_film\\214\\dcm3D"
+    target = "D:/study/summer_break/data/water_film\\213\\dcm3D"
     options = "-r -v1"
   }
   internalFields = ""
 }
 connections  {
-  View2DExtensions.inLUT = itkImageFileReader5.output0
-  View2D5.inImage = itkImageFileReader5.output0
+  Info4.input0 = itkImageFileReader5.output0
+  WorldVoxelConvert1.input0 = itkImageFileReader5.output0
+  View2DExtensions.inLUT = MPR.output0
+  View2D5.inImage = MPR.output0
   View2D5.inInvPreLUT = View2DExtensions.outNode
   ImageStatistics.input0 = MPR.output0
-  View2D3.inImage = MPR.output0
+  View2D3.inImage = itkImageFileReader5.output0
   MPR.input0 = itkImageFileReader5.output0
   MPR.translation = ComposePlane1.point
   MPR.plane = ComposePlane1.plane
-  OrthoView2D1.image = itkImageFileReader4.output0
-  OrthoView2D1.inInvPreLUT = SoView2DPlane2.self
-  SoView2DPlane2.plane = ComposePlane.plane
   OrthoTriplePlaneViewer.inImage = itkImageFileReader3.output0
   MaskToMarkers.input0 = DtfSkeletonization1.output0
   DtfSkeletonization1.input0 = itkImageFileReader3.output0
+  WorldVoxelConvert.input0 = MPR.output0
   View3D2.inImage = MinMaxScan2.output0
   itkImageFileWriter7.input0 = MarkerToMask.output0
   MarkerListInspector.inMarkerList = SmoothXMarkerList.outputXMarkerList
@@ -4040,7 +3862,19 @@ networkModel  {
         uniqueId = 204
         objectName = centerline
         parentUniqueId = 0
-        frame = "3416 234 1278 804"
+        frame = "3416 234 570 804"
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 211
+        objectName = findLargestSection
+        parentUniqueId = 0
+        frame = "4172 642 818 380"
         color  {
           r = 45
           g = 226

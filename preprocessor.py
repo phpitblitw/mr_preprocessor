@@ -8,6 +8,7 @@ import random
 import threading, subprocess
 import math
 import numpy as np
+import configparser
 #import pydicom
 
 # 设置目标路径文件
@@ -459,7 +460,22 @@ def SaveRectum():
 
 # 计算并存储直肠中轴线最大截面位置
 def CalBasePlane():
-#提取直肠中轴线
+  points,vectors,max_index=FindLargestSection() #提取直肠中轴线,找到最大截面位置
+  attitude=CalAttitude(points,vectors,max_index) #计算MRI模拟采样base平面的一组姿态参数
+  WriteConfig(attitude) #根据一组病人数据和MRI模拟采样base平面姿态，写两个ini配置文件
+  return
+
+def FindLargestSection():
+  """
+  提取直肠中轴线,找到最大截面位置
+  Args:
+    none
+  Returns:
+    points:   直肠中轴线各点
+    vectors:  起点到第i点的方向向量
+    max_index:前列腺最大截面处 对应的点下标
+  """
+  #提取直肠中轴线
   rectum_name=ctx.field("PatientID").value+"_rectum.nii"
   ctx.field("itkImageFileReader3.fileName").value=os.path.join(ctx.field("NiiDirectory").value,rectum_name)
   ctx.field("itkImageFileReader3.open").touch()
@@ -475,7 +491,7 @@ def CalBasePlane():
   if(ctx.field("RectumReverse").value):
     points=points[::-1]
     print("Rectum points reversed")
-  #沿中轴线遍历截面
+  #沿直肠中轴线遍历截面 找到截取前列腺最大截面
   prostate_name=ctx.field("PatientID").value+"_prostate.nii"
   print("prostate_name: "+os.path.join(ctx.field("NiiDirectory").value,prostate_name))
   ctx.field("itkImageFileReader5.fileName").value=os.path.join(ctx.field("NiiDirectory").value,prostate_name)
@@ -499,8 +515,122 @@ def CalBasePlane():
       max_area=ctx.field("ImageStatistics.innerVoxels").value
   print("max index"+str(max_index))#测试用 待删除 TODO
   print("max area"+str(max_area))#测试用 待删除 TODO
-  #计算base平面的姿态参数
-  
+  return points,vectors,max_index
+
+def CalAttitude(points,vectors,max_index):
+  """
+  计算MRI模拟采样base平面的一组姿态参数
+  Args:
+    points:   直肠中轴线各点
+    vectors:  起点到第i点的方向向量
+    max_index:前列腺最大截面处 对应的点下标
+  Returns:
+    attitude: MRI模拟采样超声探头姿态 ScanCenter点,RightDir向量,UpDir向量,MoveDir向量
+              wld坐标(非真实wld坐标，而是(0,0,0)对应itk(0,0,0)的伪wld坐标)
+  """
+  #计算base平面的姿态参数(WLD)
+  #关于base平面的三个关键点，计算坐标
+  #  获取三个点的真实wld坐标
+  prostate_center=np.zeros(3) #前列腺中心点 用于计算UpDir
+  start_pt=np.zeros(3) #直肠中轴线起点
+  base_rectum_pt=np.zeros(3) #最大截面位置对应的直肠中轴点
+  prostate_center[0]=(ctx.field("ImageStatistics.bBoxInX1").value+ctx.field("ImageStatistics.bBoxInX2").value)/2
+  prostate_center[1]=(ctx.field("ImageStatistics.bBoxInY1").value+ctx.field("ImageStatistics.bBoxInY2").value)/2
+  prostate_center[2]=0
+  ctx.field("WorldVoxelConvert.voxelPos").value=prostate_center.tolist()
+  prostate_center=np.array(ctx.field("WorldVoxelConvert.worldPos").value)
+  start_pt=points[0]
+  base_rectum_pt=points[max_index]
+  print("prostate center\t"+str(prostate_center))
+  print("start point\t"+str(start_pt))
+  print("base rectum pt\t"+str(base_rectum_pt))
+  #将三个点转到itk坐标
+  ctx.field("WorldVoxelConvert1.worldPos").value=prostate_center.tolist()
+  prostate_center=np.array(ctx.field("WorldVoxelConvert1.voxelPos").value)
+  ctx.field("WorldVoxelConvert1.worldPos").value=start_pt.tolist()
+  start_pt=np.array(ctx.field("WorldVoxelConvert1.voxelPos").value)
+  ctx.field("WorldVoxelConvert1.worldPos").value=base_rectum_pt.tolist()
+  base_rectum_pt=np.array(ctx.field("WorldVoxelConvert1.voxelPos").value)
+  #将三个点转到始于(0,0,0)的wld坐标
+  voxel_size=np.zeros((3))
+  voxel_size[0]=ctx.field("Info4.voxelSizeX").value
+  voxel_size[1]=ctx.field("Info4.voxelSizeY").value
+  voxel_size[2]=ctx.field("Info4.voxelSizeZ").value
+  prostate_center=prostate_center*voxel_size
+  start_pt=start_pt*voxel_size
+  base_rectum_pt=base_rectum_pt*voxel_size
+  #计算一组姿态参数
+  attitude=np.zeros((4,3))  #一组姿态参数 ScanCenter,RightDir,UpDir,MoveDir
+  attitude[0]=base_rectum_pt
+  attitude[3]=base_rectum_pt-start_pt
+  attitude[1]=np.cross(attitude[3],prostate_center-base_rectum_pt)
+  attitude[2]=np.cross(attitude[1],attitude[3])
+  print("attitude (0,0,0 wld)")
+  print(attitude)
+  return attitude
+
+def WriteConfig(attitude):
+  """
+  根据一组病人数据和MRI模拟采样base平面姿态，写两个ini配置文件
+  Args:
+    attitude: MRI模拟采样超声探头姿态 ScanCenter点,RightDir向量,UpDir向量,MoveDir向量
+              wld坐标(非真实wld坐标，而是(0,0,0)对应itk(0,0,0)的伪wld坐标)
+  Returns:
+    none
+  """
+  print("start writing config")
+  dst_root_path=os.path.join(ctx.field("DestinationDataDirectory").value,ctx.field("PatientID").value)
+  #SurgicalPlan
+  surgical_plan_path=os.path.join(dst_root_path,"SurgicalPlan.ini")
+  s_config=configparser.ConfigParser()
+
+  s_config.add_section("PATH")
+  s_config.set("PATH","MRIFileName",os.path.join(ctx.field("RawDirectory").value,ctx.field("PatientID").value+"_original.raw"))
+  s_config.set("PATH","ProstateMaskFileName",os.path.join(ctx.field("RawDirectory").value,ctx.field("PatientID").value+"_prostate.raw"))
+  s_config.set("PATH","LesionMaskFileName",os.path.join(ctx.field("RawDirectory").value,ctx.field("PatientID").value+"_rectum.raw"))
+  s_config.set("PATH","ProstateSurfaceFileName",os.path.join(ctx.field("ObjDirectory").value,ctx.field("PatientID").value+"_prostate.obj"))
+  s_config.set("PATH","LesionSurfaceFileName",os.path.join(ctx.field("ObjDirectory").value,ctx.field("PatientID").value+"_lesion.obj"))
+  s_config.set("PATH","RectumSurfaceFileName",os.path.join(ctx.field("ObjDirectory").value,ctx.field("PatientID").value+"_rectum.obj"))
+
+  s_config.add_section("MASKINFO")
+  s_config.set("MASKINFO","CX",ctx.field("Info2.sizeX").value)
+  s_config.set("MASKINFO","CY",ctx.field("Info2.sizeY").value)
+  s_config.set("MASKINFO","CZ",ctx.field("Info2.sizeZ").value)
+  s_config.set("MASKINFO","ResX",ctx.field("Info2.voxelSizeX").value)
+  s_config.set("MASKINFO","ResY",ctx.field("Info2.voxelSizeY").value)
+  s_config.set("MASKINFO","ResZ",ctx.field("Info2.voxelSizeZ").value)
+  s_config.write(open(surgical_plan_path,"w"))
+  #AnalyseProcess
+  analyse_procees_path=os.path.join(dst_root_path,"AnalyseProcess.ini")
+  a_config=configparser.ConfigParser()
+
+  a_config.add_section("Resolution")
+  a_config.set("Resolution","x",ctx.field("Info2.sizeX").value)
+  a_config.set("Resolution","y",ctx.field("Info2.sizeY").value)
+  a_config.set("Resolution","z",ctx.field("Info2.sizeZ").value)
+
+  a_config.add_section("VoxelSize")
+  a_config.set("VoxelSize","x",ctx.field("Info2.voxelSizeX").value)
+  a_config.set("VoxelSize","y",ctx.field("Info2.voxelSizeY").value)
+  a_config.set("VoxelSize","z",ctx.field("Info2.voxelSizeZ").value)
+
+  a_config.add_section("ScanCenter")
+  a_config.set("ScanCenter","x",attitude[0][0])
+  a_config.set("ScanCenter","y",attitude[0][1])
+  a_config.set("ScanCenter","z",attitude[0][2])
+  a_config.add_section("RightDir")
+  a_config.set("RightDir","x",attitude[1][0])
+  a_config.set("RightDir","y",attitude[1][1])
+  a_config.set("RightDir","z",attitude[1][2])
+  a_config.add_section("UpDir")
+  a_config.set("UpDir","x",attitude[2][0])
+  a_config.set("UpDir","y",attitude[2][1])
+  a_config.set("UpDir","z",attitude[2][2])
+  a_config.add_section("MoveDir")
+  a_config.set("MoveDir","x",attitude[3][0])
+  a_config.set("MoveDir","y",attitude[3][1])
+  a_config.set("MoveDir","z",attitude[3][2])
+  a_config.write(open(analyse_procees_path,"w"))
   return
 
 #将int16 nii的mask，转存为uint8 raw的mask 
