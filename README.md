@@ -14,3 +14,6 @@ UpDir向量:最大截面位置，2维B超图像的y轴负方向对应的三维�
 MoveDir向量:B超探头前进的方向，即从直肠入口 指向最大截面处B超探头坐标的向量
 ## SurgicalPlan 
 仅图像的像素分辨率、体素大小
+
+# v2.1
+与prostate_puncture主程序v1.2联调通过。可以实现对应读取ini配置文件以及raw数据文件。修改了AnalyseProcess.ini和SurgicalPlan.ini两个文件里的一些路径信息和section名。
