@@ -66,6 +66,13 @@ def LoadImage():
       print("name  "+name)
       ctx.field("ADCSeriesPath").value=name
   #t2 adc序列路径修改后，FieldListener响应修改，调用相关函数完成图像读取和显示
+  # 根据读取的dcm数据参数,设置其他模块对应的尺寸、体素大小信息
+  ctx.field("ImageLoad3.rawX").value=ctx.field("Info2.sizeX").value
+  ctx.field("ImageLoad3.rawY").value=ctx.field("Info2.sizeY").value
+  ctx.field("ImageLoad3.rawZ").value=ctx.field("Info2.sizeZ").value
+  ctx.field("ImagePropertyConvert1.voxelSizeX").value=ctx.field("Info2.voxelSizeX").value
+  ctx.field("ImagePropertyConvert1.voxelSizeY").value=ctx.field("Info2.voxelSizeY").value
+  ctx.field("ImagePropertyConvert1.voxelSizeZ").value=ctx.field("Info2.voxelSizeZ").value
   pass
 
 # 用于清空程序中现有的所有路径信息。包括某个特定病人的原始数据路径、程序自动寻找的t2及adc序列路径，以及输出的目标路径。
@@ -490,8 +497,6 @@ def FindLargestSection():
   for i in range(num_points):
     ctx.field("MarkerListInspector.currentMarker").value=i
     points[i]=ctx.field("MarkerListInspector.markerPosition").value
-  print("points\t")#测试用 待删除 TODO
-  print(points)#测试用 待删除 TODO
   #翻转 使得低下标点对应直肠外侧(肛门一侧)
   if(ctx.field("RectumReverse").value):
     points=points[::-1]
@@ -518,8 +523,6 @@ def FindLargestSection():
     if(ctx.field("ImageStatistics.innerVoxels").value>max_area):
       max_index=i
       max_area=ctx.field("ImageStatistics.innerVoxels").value
-  print("max index"+str(max_index))#测试用 待删除 TODO
-  print("max area"+str(max_area))#测试用 待删除 TODO
   return points,vectors,max_index
 
 def CalAttitude(points,vectors,max_index):

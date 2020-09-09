@@ -20,3 +20,4 @@ MoveDir向量:B超探头前进的方向，即从直肠入口 指向最大截面�
 
 # v2.2
 修复了rectum.obj存储文件名错误的问题
+obj文件存储wld坐标信息(itk坐标*voxelSize)
