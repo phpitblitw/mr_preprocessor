@@ -2,6 +2,260 @@
 network  {
   watchlist = ""
 }
+module ImagePropertyConvert {
+  internal  {
+    frame = "5153 837 160 56"
+    moduleGroupName = objGenerator
+    windows  {
+      window _default {
+        geometry = "411 305 337 518"
+        sizeHint = "337 518"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ImagePropertyConvert1
+    changeDimensionInfo = FALSE
+    cDimInfo = ""
+    tDimInfo = ""
+    uDimInfo = ""
+    a00 = 3.8499999
+    a01 = 0
+    a02 = 0
+    a03 = 0
+    a10 = 0
+    a11 = 3.8499999
+    a12 = 0
+    a13 = 0
+    a20 = 0
+    a21 = 0
+    a22 = 0.25
+    a23 = 0
+    a30 = 0
+    a31 = 0
+    a32 = 0
+    a33 = 1
+    worldMatrix = "3.84999990463257 0 0 0
+0 3.84999990463257 0 0
+0 0 0.25 0
+0 0 0 1"
+    changeDatatype = FALSE
+    datatype = "unsigned int8"
+    changePageSize = FALSE
+    pageSizeX = 32
+    pageSizeY = 32
+    pageSizeZ = 1
+    pageSizeC = 1
+    pageSizeT = 1
+    pageSizeU = 1
+    changeMinGreyvalue = FALSE
+    minGreyvalue = 0
+    changeMaxGreyvalue = FALSE
+    maxGreyvalue = 1
+    changeWorldMatrix = FALSE
+    voxelSizeX = 3.8499999
+    voxelSizeY = 3.8499999
+    voxelSizeZ = 0.25
+    autoApply = TRUE
+  }
+}
+module ImageLoad {
+  internal  {
+    frame = "5181 941 104 56"
+    moduleGroupName = objGenerator
+    windows  {
+      window _default {
+        geometry = "818 415 298 311"
+        sizeHint = "298 311"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ImageLoad3
+    filename = "D:/study/summer_break/data/water_film\\221\\raw\\221_prostate.raw"
+    autoLoad = TRUE
+    readRaw = TRUE
+    rawX = 320
+    rawY = 320
+    rawZ = 30
+    rawC = 1
+    rawT = 1
+    rawU = 1
+    dataTypeRaw = "unsigned int8"
+    planarConfig = Contiguous
+    byteOrder = LittleEndian
+    dataOffset = 0
+    pageSizeHint = "0 0 0 0 0 0"
+    suppressErrorLog = FALSE
+    dicomIgnoreHalfVoxelShift = FALSE
+  }
+}
+module WEMSave {
+  internal  {
+    frame = "5185 501 96 56"
+    moduleGroupName = objGenerator
+    windows  {
+      window _default {
+        geometry = "774 584 466 161"
+        sizeHint = "466 161"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WEMSave3
+    autoApply = FALSE
+    autoUpdate = FALSE
+    autoClear = TRUE
+    listenToFinishingNotifications = FALSE
+    listenToRepaintNotifications = FALSE
+    listenToSelectionChangedNotifications = FALSE
+    filename = "D:/study/summer_break/data/water_film\\221\\obj\\221_prostate.obj"
+    fileType = "Wavefront (.obj)"
+    inWEMValid = TRUE
+    status = "WEM saved to file."
+  }
+}
+module WEMSmooth {
+  internal  {
+    frame = "5177 613 112 56"
+    moduleGroupName = objGenerator
+    windows  {
+      window _default {
+        geometry = "801 357 333 426"
+        sizeHint = "333 426"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WEMSmooth3
+    id = 0
+    autoApply = TRUE
+    autoUpdate = TRUE
+    autoClear = FALSE
+    removePreviousWEMs = TRUE
+    label = ""
+    description = ""
+    show = TRUE
+    editable = TRUE
+    colorMode = "General "
+    drawFaces = TRUE
+    useFaceAmbientColor = TRUE
+    faceAmbientColor = "0.266667008399963 0.266667008399963 0.266667008399963"
+    useFaceDiffuseColor = TRUE
+    faceDiffuseColor = "0.792156994342804 0.792156994342804 0.792156994342804"
+    useFaceSpecularColor = TRUE
+    faceSpecularColor = "0.0666669979691505 0.0666669979691505 0.0666669979691505"
+    faceAlphaValue = 1
+    faceShininessValue = 1
+    drawFaceNormals = FALSE
+    faceNormalsColor = "1 1 1"
+    faceNormalsScale = 1
+    drawEdges = FALSE
+    edgeColor = "0 0 0"
+    usePolygonOffset = FALSE
+    lineWidth = 1
+    useEdgeColoringMode = FALSE
+    drawNodes = FALSE
+    nodeColor = "1 1 1"
+    drawNodeNormals = FALSE
+    nodeNormalsColor = "1 1 1"
+    nodeNormalsScale = 1
+    pointSize = 1
+    nodeRenderingMode = Normal
+    drawBoundingBoxes = FALSE
+    boundingBoxMode = "Axis Aligned"
+    boundingBoxColor = "1 1 1"
+    copyInputWEMs = FALSE
+    listenToFinishNotifications = TRUE
+    forwardRepaintNotifications = TRUE
+    forwardSelectionNotifications = TRUE
+    triangulationMode = Strip
+    modifyAttributes = FALSE
+    useLaplacianSmooth = TRUE
+    smoothingFactor = 0.2
+    smoothingPassesLaplace = 10
+    useDisplacementAdjustment = TRUE
+    useBorderPreservation = TRUE
+    useNormalSmooth = FALSE
+    smoothingPassesNormals = 2
+    selectedTab = 0
+    outputTabSelected = TRUE
+  }
+}
+module WEMIsoSurface {
+  internal  {
+    frame = "5169 725 128 56"
+    moduleGroupName = objGenerator
+    windows  {
+      window _default {
+        geometry = "771 357 393 426"
+        sizeHint = "393 426"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WEMIsoSurface3
+    id = 0
+    autoApply = TRUE
+    autoUpdate = TRUE
+    autoClear = TRUE
+    removePreviousWEMs = TRUE
+    label = ""
+    description = ""
+    show = TRUE
+    editable = TRUE
+    colorMode = "General "
+    drawFaces = TRUE
+    useFaceAmbientColor = TRUE
+    faceAmbientColor = "0.266667008399963 0.266667008399963 0.266667008399963"
+    useFaceDiffuseColor = TRUE
+    faceDiffuseColor = "0.792156994342804 0.792156994342804 0.792156994342804"
+    useFaceSpecularColor = TRUE
+    faceSpecularColor = "0.0666669979691505 0.0666669979691505 0.0666669979691505"
+    faceAlphaValue = 1
+    faceShininessValue = 1
+    drawFaceNormals = FALSE
+    faceNormalsColor = "1 1 1"
+    faceNormalsScale = 1
+    drawEdges = FALSE
+    edgeColor = "0 0 0"
+    usePolygonOffset = FALSE
+    lineWidth = 1
+    useEdgeColoringMode = FALSE
+    drawNodes = FALSE
+    nodeColor = "1 1 1"
+    drawNodeNormals = FALSE
+    nodeNormalsColor = "1 1 1"
+    nodeNormalsScale = 1
+    pointSize = 1
+    nodeRenderingMode = Normal
+    drawBoundingBoxes = FALSE
+    boundingBoxMode = "Axis Aligned"
+    boundingBoxColor = "1 1 1"
+    isoMinValue = 1
+    isoMaxValue = 1
+    useMinValue = FALSE
+    useMaxValue = FALSE
+    cellExtend = "3 3 3"
+    useWorldCoords = TRUE
+    useInterpolation = TRUE
+    useQuadrification = FALSE
+    useFaceValueList = FALSE
+    useValenceThreeRemoval = TRUE
+    useZeroLengthEdgeRemoval = TRUE
+    selectedTab = 0
+  }
+}
 module Info {
   internal  {
     frame = "4265 861 64 56"
@@ -36,14 +290,14 @@ module WorldVoxelConvert {
   }
   fields  {
     instanceName = WorldVoxelConvert1
-    voxelX = 156.8125
-    voxelY = 210.3125
-    voxelZ = 3.4999995
-    worldX = 156.8125
-    worldY = 210.3125
-    worldZ = 3.4999995
-    voxelPos = "156.8125 210.3125 3.49999952316284"
-    worldPos = "156.8125 210.3125 3.49999952316284"
+    voxelX = 158.5
+    voxelY = 210.5
+    voxelZ = 2.5
+    worldX = 158.5
+    worldY = 210.5
+    worldZ = 2.5
+    voxelPos = "158.5 210.5 2.5"
+    worldPos = "158.5 210.5 2.5"
     voxelMode = TRUE
     worldMode = FALSE
     intVoxelCoords = FALSE
@@ -255,7 +509,7 @@ module View2D {
     borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
     valueHighPrecision = TRUE
     maxPrecision = 4
-    plane = "0.0292038284242153 -0.0175222977995872 -0.999419867992401 73.3825988769531"
+    plane = "0.0121723925694823 -0.0182585902512074 -0.999759256839752 69.7323379516602"
   }
   internalFields = ""
 }
@@ -356,9 +610,9 @@ module ComposePlane {
   }
   fields  {
     instanceName = ComposePlane1
-    point = "-15.2947463989258 104.727310180664 -75.708251953125"
-    normal = "-2.8125 1.6875 96.2500019073486"
-    plane = "-0.0292038272161814 0.0175222963297089 0.999419884536655 -73.3826043315157"
+    point = "-15.2947463989258 105.289810180664 -71.8582534790039"
+    normal = "-1.125 1.6875 92.4000034332275"
+    plane = "-0.0121723923976855 0.0182585885965282 0.999759199410428 -69.7323329869144"
   }
 }
 module MPR {
@@ -382,9 +636,9 @@ module MPR {
   }
   fields  {
     instanceName = MPR
-    rotation = "-0.72823615301826 0.499242009505084 0.469499224048871 4.39861695611377"
-    translation = "-15.2947463989258 104.727310180664 -75.708251953125"
-    plane = "-0.0292038272161814 0.0175222963297089 0.999419884536655 -73.3826043315157"
+    rotation = "-0.771969952411633 0.458220640446438 0.440563545067493 4.46728478199217"
+    translation = "-15.2947463989258 105.289810180664 -71.8582534790039"
+    plane = "-0.0121723923976855 0.0182585885965282 0.999759199410428 -69.7323329869144"
     enablePlaneEdit = TRUE
     fillValue = 0
     fieldOfView = 150
@@ -521,14 +775,14 @@ module WorldVoxelConvert {
   }
   fields  {
     instanceName = WorldVoxelConvert
-    voxelX = 186
-    voxelY = 155
+    voxelX = 180
+    voxelY = 162
     voxelZ = 0
-    worldX = 186
-    worldY = 155
+    worldX = 180
+    worldY = 162
     worldZ = 0
-    voxelPos = "186 155 0"
-    worldPos = "186 155 0"
+    voxelPos = "180 162 0"
+    worldPos = "180 162 0"
     voxelMode = TRUE
     worldMode = FALSE
     intVoxelCoords = FALSE
@@ -566,7 +820,7 @@ module View3D {
     greyWidth = 0.66500002
     camType = TRUE
     camPosition = "218.994827270508 203.125961303711 -237.264312744141"
-    camOrientation = "0.610980570316315 0.676499247550964 0.411158740520477 2.85318970680237"
+    camOrientation = "0.610980570316315 0.676499307155609 0.411158800125122 2.85318970680237"
     initialCameraOrientation = CAMERA_KEEP_AS_IS
     camFar = 473.46042
     camNear = 207.29681
@@ -724,11 +978,11 @@ module MarkerListInspector {
     drawMode = DrawModeFast
     useFastMode = TRUE
     hide3DView = TRUE
-    numMarkers = 29
+    numMarkers = 33
     selMarker = -1
     markerPosition = "0 0 0"
     markerVector = "0 0 0"
-    currentMarker = 28
+    currentMarker = 32
     currentType = 0
     detail = FALSE
     tabbar = shortinfo
@@ -998,7 +1252,7 @@ Filename = D:/study/summer_break/data/water_film/temp/211_original.nii
 }
 module SoWEMRenderer {
   internal  {
-    frame = "2357 -27 136 56"
+    frame = "2461 -139 136 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -1047,7 +1301,7 @@ module SoWEMRenderer {
     nodeNormalColor = "1 1 1"
     faceNormalScaling = 1
     nodeNormalScaling = 1
-    faceAlphaValue = 0.29899999
+    faceAlphaValue = 0.28999999
     faceShininessValue = 1
     lineWidth = 1
     pointSize = 1
@@ -1055,14 +1309,14 @@ module SoWEMRenderer {
     nodeRenderingMode = WEM_NODE_RENDERING_NORMAL
     boundingBoxMode = WEM_BOUNDING_BOX_AXIS_ALIGNED
     primitiveValueLists = ""
-    selectedPrimitiveValueList = ""
+    selectedPrimitiveValueList = LUT
     primitiveValueListValid = TRUE
     selectedTab = 0
   }
 }
 module WEMSmooth {
   internal  {
-    frame = "2361 77 112 56"
+    frame = "2465 -35 112 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -1131,7 +1385,7 @@ module WEMSmooth {
 }
 module WEMIsoSurface {
   internal  {
-    frame = "2353 165 128 56"
+    frame = "2457 53 128 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -1197,12 +1451,12 @@ module WEMIsoSurface {
 }
 module WEMSave {
   internal  {
-    frame = "2449 -27 96 56"
+    frame = "2553 -139 96 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
-        geometry = "734 490 559 181"
-        sizeHint = "559 181"
+        geometry = "734 490 466 161"
+        sizeHint = "466 161"
         wasOpen = no
         wasActive = no
       }
@@ -1216,7 +1470,7 @@ module WEMSave {
     listenToFinishingNotifications = FALSE
     listenToRepaintNotifications = FALSE
     listenToSelectionChangedNotifications = FALSE
-    filename = "D:/study/summer_break/data/water_film\\213\\obj\\213_rectum.nii"
+    filename = "D:/study/summer_break/data/water_film\\219\\obj\\219_rectum.obj"
     fileType = "Wavefront (.obj)"
     inWEMValid = TRUE
     status = "Valid WEM connected"
@@ -1274,7 +1528,7 @@ module SoView2DOverlay {
   }
   fields  {
     instanceName = SoView2DOverlay2
-    drawingOn = TRUE
+    drawingOn = FALSE
     editingOn = TRUE
     maskValid = TRUE
     fixZOn = TRUE
@@ -1404,7 +1658,7 @@ module CSOFilter {
 }
 module WEMSave {
   internal  {
-    frame = "2249 -27 96 56"
+    frame = "2353 -139 96 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -1423,7 +1677,7 @@ module WEMSave {
     listenToFinishingNotifications = FALSE
     listenToRepaintNotifications = FALSE
     listenToSelectionChangedNotifications = FALSE
-    filename = "D:/study/summer_break/data/water_film\\213\\obj\\213_lesion.obj"
+    filename = "D:/study/summer_break/data/water_film\\219\\obj\\219_lesion.obj"
     fileType = "Wavefront (.obj)"
     inWEMValid = TRUE
     status = "Valid WEM connected"
@@ -1431,7 +1685,7 @@ module WEMSave {
 }
 module WEMSave {
   internal  {
-    frame = "2029 -27 88 56"
+    frame = "2133 -139 88 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -1450,10 +1704,10 @@ module WEMSave {
     listenToFinishingNotifications = FALSE
     listenToRepaintNotifications = FALSE
     listenToSelectionChangedNotifications = FALSE
-    filename = "D:/study/summer_break/data/water_film\\213\\obj\\213_prostate.obj"
+    filename = "D:/study/summer_break/data/water_film\\219\\obj\\219_prostate.obj"
     fileType = "Wavefront (.obj)"
     inWEMValid = TRUE
-    status = "Valid WEM connected"
+    status = "WEM saved to file."
   }
 }
 module View2D {
@@ -1529,12 +1783,12 @@ module ImageSave {
   fields  {
     instanceName = ImageSave1
     taskVerboseLogging = FALSE
-    filename = "D:/study/summer_break/data/water_film\\213\\raw\\213_original.raw"
+    filename = "D:/study/summer_break/data/water_film\\221\\raw\\221_original.raw"
     format = RAW
     comment = MeVisLab
     allowOverwrite = TRUE
     autoFilename = FALSE
-    sourceName = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0014.dcm"
+    sourceName = "D:/study/summer_break/data/water_film\\221\\dcm3D\\______SHUI_2117839_0014.dcm"
     postfix = .result1
     dicomNameUsed = TRUE
     dicomMetaHeader = TRUE
@@ -1760,10 +2014,7 @@ module itkImageFileReader {
     fileDataType = int8
     correctSubVoxelShift = FALSE
     fileDimension = 3
-    info = " Could not create IO object for file E:/study/prostate/data/caoguangyou/result/nii_int8/MR397548_rectum.nii
-The file doesn't exist. 
-Filename = E:/study/prostate/data/caoguangyou/result/nii_int8/MR397548_rectum.nii
- Loaded data may be undefined."
+    info = "File closed"
     unresolvedFileName = E:/study/prostate/data/caoguangyou/result/nii_int8/MR397548_rectum.nii
   }
 }
@@ -1810,7 +2061,7 @@ module itkImageFileReader {
     fileDataType = "unsigned int8"
     correctSubVoxelShift = FALSE
     fileDimension = 3
-    info = "Invalid path"
+    info = "File closed"
     unresolvedFileName = ""
   }
 }
@@ -1831,7 +2082,7 @@ module View2D {
     instanceName = View2D1
     inventorInputOn = TRUE
     view2DExtensionsOn = TRUE
-    startSlice = -1
+    startSlice = 0
     numSlices = 1
     numXSlices = 1
     sliceStep = 1
@@ -1890,7 +2141,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = "unsigned int8"
-    info = ""
+    info = "File saved successfully"
     unresolvedFileName = ""
   }
 }
@@ -1912,7 +2163,7 @@ module itkImageFileReader {
     fileDataType = int16
     correctSubVoxelShift = FALSE
     fileDimension = 3
-    info = "Invalid path"
+    info = "File closed"
     unresolvedFileName = ""
   }
 }
@@ -1932,7 +2183,7 @@ module ImageSave {
   fields  {
     instanceName = ImageSave
     taskVerboseLogging = FALSE
-    filename = "D:/study/summer_break/data/water_film\\213\\raw\\213_rectum.raw"
+    filename = "D:/study/summer_break/data/water_film\\221\\raw\\221_prostate.raw"
     format = RAW
     comment = MeVisLab
     allowOverwrite = TRUE
@@ -1962,7 +2213,7 @@ module ImageSave {
 }
 module SoExaminerViewer {
   internal  {
-    frame = "1941 -155 152 56"
+    frame = "2045 -267 152 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -2034,8 +2285,8 @@ module SoExaminerViewer {
     height = 128.18929
     position = "-30.2719230651855 63.8923797607422 8.24601173400879"
     orientation = "-0.631482243537903 -0.241138577461243 0.73694121837616 3.14204859733582"
-    nearDistance = -15.748168
-    farDistance = 62.322735
+    nearDistance = -12.17905
+    farDistance = 51.857754
     focalDistance = 34.831348
     forceRedrawOnInteraction = FALSE
     button1events = TO_VIEWER
@@ -2055,7 +2306,7 @@ module SoExaminerViewer {
 }
 module WEMIsoSurface {
   internal  {
-    frame = "2153 165 128 56"
+    frame = "2257 53 128 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -2121,7 +2372,7 @@ module WEMIsoSurface {
 }
 module WEMSmooth {
   internal  {
-    frame = "2161 77 112 56"
+    frame = "2265 -35 112 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -2190,7 +2441,7 @@ module WEMSmooth {
 }
 module SoWEMRenderer {
   internal  {
-    frame = "2157 -27 136 56"
+    frame = "2261 -139 136 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -2239,7 +2490,7 @@ module SoWEMRenderer {
     nodeNormalColor = "1 1 1"
     faceNormalScaling = 1
     nodeNormalScaling = 1
-    faceAlphaValue = 0.303
+    faceAlphaValue = 0.243
     faceShininessValue = 1
     lineWidth = 1
     pointSize = 1
@@ -2254,7 +2505,7 @@ module SoWEMRenderer {
 }
 module SoBackground {
   internal  {
-    frame = "1809 -27 112 56"
+    frame = "1913 -139 112 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -2275,7 +2526,7 @@ module SoBackground {
 }
 module SoWEMRenderer {
   internal  {
-    frame = "1937 -27 128 56"
+    frame = "2041 -139 128 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -2324,14 +2575,14 @@ module SoWEMRenderer {
     nodeNormalColor = "1 1 1"
     faceNormalScaling = 1
     nodeNormalScaling = 1
-    faceAlphaValue = 0.285
+    faceAlphaValue = 0.17900001
     faceShininessValue = 1
     lineWidth = 1
     pointSize = 1
     useEdgeColoringMode = FALSE
     nodeRenderingMode = WEM_NODE_RENDERING_NORMAL
     boundingBoxMode = WEM_BOUNDING_BOX_AXIS_ALIGNED
-    primitiveValueLists = ""
+    primitiveValueLists = LUT
     selectedPrimitiveValueList = LUT
     primitiveValueListValid = TRUE
     selectedTab = 0
@@ -2339,7 +2590,7 @@ module SoWEMRenderer {
 }
 module WEMSmooth {
   internal  {
-    frame = "1989 77 104 56"
+    frame = "2093 -35 104 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -2408,7 +2659,7 @@ module WEMSmooth {
 }
 module WEMIsoSurface {
   internal  {
-    frame = "1981 165 120 56"
+    frame = "2085 53 120 56"
     moduleGroupName = 3dviewer
     windows  {
       window _default {
@@ -2496,7 +2747,7 @@ module SynchroView2D {
     disconnectOnHide = TRUE
     snapToCenter1 = FALSE
     snapToCenter2 = FALSE
-    slice1 = 26
+    slice1 = 15
     slice2 = 0
     timepoint1 = 0
     timepoint2 = 0
@@ -2510,7 +2761,7 @@ module SynchroView2D {
     background = "0 0 0"
     borderOn = FALSE
     showCurrentPos = FALSE
-    worldPosition = "-4.72351837158203 113.543441772461 32.0917434692383"
+    worldPosition = "-12.4220962524414 80.9161529541016 -21.8082542419434"
   }
   internalFields = ""
 }
@@ -2583,7 +2834,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad2
-    filename = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0015.dcm"
+    filename = "D:/study/summer_break/data/water_film\\221\\dcm3D\\______SHUI_2117839_0015.dcm"
     autoLoad = TRUE
     readRaw = FALSE
     rawX = 1
@@ -2628,7 +2879,7 @@ module DicomTagViewer {
     maxValueLen = 80
     showPrivateTags = FALSE
     tagListSubset = AllTags
-    dicomFile = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0015.dcm"
+    dicomFile = "D:/study/summer_break/data/water_film\\221\\dcm3D\\______SHUI_2117839_0015.dcm"
     trimSpaces = FALSE
   }
 }
@@ -2659,7 +2910,7 @@ module DicomTagViewer {
     maxValueLen = 80
     showPrivateTags = FALSE
     tagListSubset = AllTags
-    dicomFile = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0014.dcm"
+    dicomFile = "D:/study/summer_break/data/water_film\\221\\dcm3D\\______SHUI_2117839_0014.dcm"
     trimSpaces = FALSE
   }
 }
@@ -2746,7 +2997,7 @@ world_mat(1:3,4) = t"
     scalar5 = 0
     numberOfStrings = 1
     stringName0 = dcm_path
-    string0 = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0014.dcm"
+    string0 = "D:/study/summer_break/data/water_film\\221\\dcm3D\\______SHUI_2117839_0014.dcm"
     stringName1 = string1
     string1 = ""
     stringName2 = string2
@@ -2808,7 +3059,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad
-    filename = "D:/study/summer_break/data/water_film\\213\\dcm3D\\______SHUI_2117839_0014.dcm"
+    filename = "D:/study/summer_break/data/water_film\\221\\dcm3D\\______SHUI_2117839_0014.dcm"
     autoLoad = TRUE
     readRaw = FALSE
     rawX = 1
@@ -3134,7 +3385,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = int16
-    info = ""
+    info = "File saved successfully"
     unresolvedFileName = E:/study/summer_break/data/test/test3.nii
   }
 }
@@ -3170,7 +3421,7 @@ module SoView2DOverlay {
   }
   fields  {
     instanceName = SoView2DOverlay1
-    drawingOn = TRUE
+    drawingOn = FALSE
     editingOn = TRUE
     maskValid = TRUE
     fixZOn = TRUE
@@ -3226,13 +3477,13 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = Automatic
-    info = ""
+    info = "File saved successfully"
     unresolvedFileName = ""
   }
 }
 module View2D {
   internal  {
-    frame = "1565 -363 120 56"
+    frame = "1525 -435 120 56"
     moduleGroupName = ""
     windows  {
       window _default {
@@ -3442,7 +3693,7 @@ module CSOInspector {
     instanceName = CSOInspector
     markerSizeScaling = 1
     continuousUpdate = FALSE
-    numCSOs = 0
+    numCSOs = 3
     numGroups = 0
     useDecoration = FALSE
     showBackground = TRUE
@@ -3558,7 +3809,7 @@ module CSOManager {
     listSingleRemoveEmptyGroupHandling = RemoveAlways
     listDefaultRemoveEmptyGroupHandling = RemoveAlways
     enableUndoRedo = TRUE
-    numUndos = 0
+    numUndos = 4
     numRedos = 0
     undoStackLimit = 16
     useSelectionCSONotification = FALSE
@@ -3575,7 +3826,7 @@ module CSOManager {
     enableRepaintNotification = TRUE
     csoTreeView = ""
     groupTreeView = ""
-    numCSOs = 12
+    numCSOs = 3
     numGroups = 0
     numSelectedCSOs = 0
     numSelectedGroups = 0
@@ -3728,12 +3979,16 @@ module DicomImport {
   fields  {
     instanceName = DicomImport
     source = D:/study/summer_break/data/water_film/dcm_folders
-    target = "D:/study/summer_break/data/water_film\\213\\dcm3D"
+    target = "D:/study/summer_break/data/water_film\\221\\dcm3D"
     options = "-r -v1"
   }
   internalFields = ""
 }
 connections  {
+  ImagePropertyConvert1.input0 = ImageLoad3.output0
+  WEMSave3.inWEM = WEMSmooth3.outWEM
+  WEMSmooth3.inWEM = WEMIsoSurface3.outWEM
+  WEMIsoSurface3.input0 = ImagePropertyConvert1.output0
   Info4.input0 = itkImageFileReader5.output0
   WorldVoxelConvert1.input0 = itkImageFileReader5.output0
   View2DExtensions.inLUT = MPR.output0
@@ -3850,7 +4105,7 @@ networkModel  {
         uniqueId = 309
         objectName = 3dviewer
         parentUniqueId = 0
-        frame = "1784 -230 786 476"
+        frame = "1888 -342 786 476"
         color  {
           r = 45
           g = 226
@@ -3875,6 +4130,18 @@ networkModel  {
         objectName = findLargestSection
         parentUniqueId = 0
         frame = "4172 642 818 380"
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 220
+        objectName = objGenerator
+        parentUniqueId = 0
+        frame = "5128 426 210 596"
         color  {
           r = 45
           g = 226

@@ -414,9 +414,12 @@ def SaveProstate():
   Nii2Raw(ctx.field("itkImageFileWriter1.fileName").value,os.path.join(ctx.field("RawDirectory").value,prostate_name))
   print("raw of prostate mask saved")
   #存储obj网格数据
+  print("测试路径")
+  print(os.path.join(ctx.field("RawDirectory").value,prostate_name))
+  ctx.field("ImageLoad3.filename").value=os.path.join(ctx.field("RawDirectory").value,prostate_name)
   prostate_name=ctx.field("PatientID").value+"_prostate.obj"
-  ctx.field("WEMSave.filename").value=os.path.join(ctx.field("ObjDirectory").value,prostate_name)
-  ctx.field("WEMSave.save").touch()
+  ctx.field("WEMSave3.filename").value=os.path.join(ctx.field("ObjDirectory").value,prostate_name)
+  ctx.field("WEMSave3.save").touch()
   print("obj of prostate mask saved")
   pass
 
@@ -432,10 +435,11 @@ def SaveLesion():
   Nii2Raw(ctx.field("itkImageFileWriter2.fileName").value,os.path.join(ctx.field("RawDirectory").value,lesion_name))
   print("raw of lesion mask saved")
   #存储obj网格数据
-  prostate_name=ctx.field("PatientID").value+"_lesion.obj"
-  ctx.field("WEMSave1.filename").value=os.path.join(ctx.field("ObjDirectory").value,prostate_name)
-  ctx.field("WEMSave1.save").touch()
-  print("obj of prostate mask saved")
+  ctx.field("ImageLoad3.filename").value=os.path.join(ctx.field("RawDirectory").value,lesion_name)
+  lesion_name=ctx.field("PatientID").value+"_lesion.obj"
+  ctx.field("WEMSave3.filename").value=os.path.join(ctx.field("ObjDirectory").value,lesion_name)
+  ctx.field("WEMSave3.save").touch()
+  print("obj of lesion mask saved")
   pass
 
 # 存储rectum的相关参数
@@ -450,9 +454,10 @@ def SaveRectum():
   Nii2Raw(ctx.field("itkImageFileWriter6.fileName").value,os.path.join(ctx.field("RawDirectory").value,rectum_name))
   print("raw of rectum mask saved")
   #存储obj网格数据
-  rectum_name=ctx.field("PatientID").value+"_rectum.nii"
-  ctx.field("WEMSave2.filename").value=os.path.join(ctx.field("ObjDirectory").value,rectum_name)
-  ctx.field("WEMSave2.save").touch()
+  ctx.field("ImageLoad3.filename").value=os.path.join(ctx.field("RawDirectory").value,rectum_name)
+  rectum_name=ctx.field("PatientID").value+"_rectum.obj"
+  ctx.field("WEMSave3.filename").value=os.path.join(ctx.field("ObjDirectory").value,rectum_name)
+  ctx.field("WEMSave3.save").touch()
   print("obj of rectum mask saved")
   #计算最大截面位置
   CalBasePlane()

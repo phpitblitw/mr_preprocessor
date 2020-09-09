@@ -17,3 +17,6 @@ MoveDir向量:B超探头前进的方向，即从直肠入口 指向最大截面�
 
 # v2.1
 与prostate_puncture主程序v1.2联调通过。可以实现对应读取ini配置文件以及raw数据文件。修改了AnalyseProcess.ini和SurgicalPlan.ini两个文件里的一些路径信息和section名。
+
+# v2.2
+修复了rectum.obj存储文件名错误的问题
