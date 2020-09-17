@@ -483,14 +483,20 @@ def FindLargestSection():
   Args:
     none
   Returns:
-    points:   直肠中轴线各点
-    vectors:  起点到第i点的方向向量
+    points:   直肠中轴线各点  始于(0,0,0)的wld坐标
+    vectors:  起点到第i点的方向向量 始于(0,0,0)的wld坐标
     max_index:前列腺最大截面处 对应的点下标
   """
   #提取直肠中轴线
-  rectum_name=ctx.field("PatientID").value+"_rectum.nii"
-  ctx.field("itkImageFileReader3.fileName").value=os.path.join(ctx.field("NiiDirectory").value,rectum_name)
-  ctx.field("itkImageFileReader3.open").touch()
+  rectum_name=ctx.field("PatientID").value+"_rectum.raw"
+  ctx.field("ImageLoad4.filename").value=os.path.join(ctx.field("RawDirectory").value,rectum_name)
+  ctx.field("ImageLoad4.rawX").value=ctx.field("Info2.sizeX").value
+  ctx.field("ImageLoad4.rawY").value=ctx.field("Info2.sizeY").value
+  ctx.field("ImageLoad4.rawZ").value=ctx.field("Info2.sizeZ").value
+  ctx.field("ImagePropertyConvert2.voxelSizeX").value=ctx.field("Info2.voxelSizeX").value
+  ctx.field("ImagePropertyConvert2.voxelSizeY").value=ctx.field("Info2.voxelSizeY").value
+  ctx.field("ImagePropertyConvert2.voxelSizeZ").value=ctx.field("Info2.voxelSizeZ").value
+  ctx.field("ImageLoad4.load").touch()
   ctx.field("MarkerListInspector.update").touch()
   num_points=ctx.field("MarkerListInspector.numMarkers").value
   points=np.zeros((num_points,3))
@@ -502,10 +508,15 @@ def FindLargestSection():
     points=points[::-1]
     print("Rectum points reversed")
   #沿直肠中轴线遍历截面 找到截取前列腺最大截面
-  prostate_name=ctx.field("PatientID").value+"_prostate.nii"
-  print("prostate_name: "+os.path.join(ctx.field("NiiDirectory").value,prostate_name))
-  ctx.field("itkImageFileReader5.fileName").value=os.path.join(ctx.field("NiiDirectory").value,prostate_name)
-  ctx.field("itkImageFileReader5.open").touch()
+  prostate_name=ctx.field("PatientID").value+"_prostate.raw"
+  ctx.field("ImageLoad5.filename").value=os.path.join(ctx.field("RawDirectory").value,prostate_name)
+  ctx.field("ImageLoad5.rawX").value=ctx.field("Info2.sizeX").value
+  ctx.field("ImageLoad5.rawY").value=ctx.field("Info2.sizeY").value
+  ctx.field("ImageLoad5.rawZ").value=ctx.field("Info2.sizeZ").value
+  ctx.field("ImagePropertyConvert3.voxelSizeX").value=ctx.field("Info2.voxelSizeX").value
+  ctx.field("ImagePropertyConvert3.voxelSizeY").value=ctx.field("Info2.voxelSizeY").value
+  ctx.field("ImagePropertyConvert3.voxelSizeZ").value=ctx.field("Info2.voxelSizeZ").value
+  ctx.field("ImageLoad5.load").touch()
   vectors=points.copy() #vector[i,:]用于记录起点到第i点的方向向量
   max_area=-1
   max_index=-1
@@ -514,15 +525,16 @@ def FindLargestSection():
     print("vector "+str(i)+"\t") #测试用 待删除 TODO
     print(vectors[i]) #测试用 待删除 TODO
     #自动计算参考平面，通过field connection更新平面参数至MPR
-    ctx.field("ComposePlane1.point").value=points[0].tolist() #设置平面上的点
+    ctx.field("ComposePlane1.point").value=points[i].tolist() #设置平面上的点
     ctx.field("ComposePlane1.normal").value=vectors[i].tolist() #设置平面法向量
     #MRP截取平面
     #比较 计算前景区域大小
     ctx.field("ImageStatistics.update").touch()
-    print("area"+str(ctx.field("ImageStatistics.innerVoxels").value)+"\n")#测试用 待删除 TODO
+    print("area of section "+str(i)+'\t'+str(ctx.field("ImageStatistics.innerVoxels").value)+"\n")#测试用 待删除 TODO
     if(ctx.field("ImageStatistics.innerVoxels").value>max_area):
       max_index=i
       max_area=ctx.field("ImageStatistics.innerVoxels").value
+  print("max_index:\t"+str(max_index))
   return points,vectors,max_index
 
 def CalAttitude(points,vectors,max_index):
@@ -536,6 +548,35 @@ def CalAttitude(points,vectors,max_index):
     attitude: MRI模拟采样超声探头姿态 ScanCenter点,RightDir向量,UpDir向量,MoveDir向量
               wld坐标(非真实wld坐标，而是(0,0,0)对应itk(0,0,0)的伪wld坐标)
   """
+
+  # 定位到最大截面
+  ctx.field("ComposePlane1.point").value=points[max_index].tolist() #设置平面上的点
+  ctx.field("ComposePlane1.normal").value=vectors[max_index].tolist() #设置平面法向量
+  # 获取三个关键点坐标
+  prostate_center=np.zeros(3) #前列腺中心点 用于计算UpDir
+  start_pt=np.zeros(3) #直肠中轴线起点
+  base_rectum_pt=np.zeros(3) #最大截面位置对应的直肠中轴点
+  prostate_center[0]=(ctx.field("ImageStatistics.bBoxInX1").value+ctx.field("ImageStatistics.bBoxInX2").value)/2
+  prostate_center[1]=(ctx.field("ImageStatistics.bBoxInY1").value+ctx.field("ImageStatistics.bBoxInY2").value)/2
+  prostate_center[2]=0
+  ctx.field("WorldVoxelConvert.voxelPos").value=prostate_center.tolist()
+  prostate_center=np.array(ctx.field("WorldVoxelConvert.worldPos").value)
+  start_pt=points[0]
+  base_rectum_pt=points[max_index]
+  print("prostate_center:\t"+str(prostate_center))
+  print("start_pt:\t"+str(start_pt))
+  print("base_rectum_pt"+str(base_rectum_pt))
+  # 计算一组姿态参数
+  attitude=np.zeros((4,3))  #一组姿态参数 ScanCenter,RightDir,UpDir,MoveDir
+  attitude[0]=base_rectum_pt
+  attitude[3]=base_rectum_pt-start_pt
+  attitude[1]=np.cross(attitude[3],prostate_center-base_rectum_pt)
+  attitude[2]=np.cross(attitude[1],attitude[3])
+  print("attitude (0,0,0 wld)")
+  print(attitude)
+
+
+  '''
   #计算base平面的姿态参数(WLD)
   #关于base平面的三个关键点，计算坐标
   #  获取三个点的真实wld坐标
@@ -575,6 +616,8 @@ def CalAttitude(points,vectors,max_index):
   attitude[2]=np.cross(attitude[1],attitude[3])
   print("attitude (0,0,0 wld)")
   print(attitude)
+  '''
+
   return attitude
 
 def WriteConfig(attitude):

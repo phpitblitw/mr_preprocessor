@@ -21,3 +21,6 @@ MoveDir向量:B超探头前进的方向，即从直肠入口 指向最大截面�
 # v2.2
 修复了rectum.obj存储文件名错误的问题
 obj文件存储wld坐标信息(itk坐标*voxelSize)
+
+# v2.3
+用imagePropertyConvert模块来进行ijk到wld(始于0,0,0)的坐标转换，重写了部分py脚本。修正了截取平面的参数(528行)
