@@ -23,4 +23,8 @@ MoveDir向量:B超探头前进的方向，即从直肠入口 指向最大截面�
 obj文件存储wld坐标信息(itk坐标*voxelSize)
 
 # v2.3
-用imagePropertyConvert模块来进行ijk到wld(始于0,0,0)的坐标转换，重写了部分py脚本。修正了截取平面的参数(528行)
+用imagePropertyConvert模块来进行ijk到wld(始于0,0,0)的坐标转换，重写了部分py脚本。修正了截取平面的参数(528行) 
+
+# v2.3.1
+修正了v 2.3中的数据问题。
+添加了.gitignore文件 不再跟踪pyc文件
