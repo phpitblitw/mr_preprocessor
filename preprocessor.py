@@ -401,6 +401,30 @@ def SetDisplayRectum():
   print("display of rectum set to "+str(ctx.field("SoView2DOverlay2.drawingOn").value))
   pass
 
+#更新obj文件 统计点、面的数量
+def transformObj(strFileName):
+    nVCount=0
+    nFCount=0
+    #s=""
+    file=open(strFileName,"r+",1)
+    lines=file.readlines()
+    #统计点、面的数量
+    for line in lines:
+        if line.startswith('v'):
+            nVCount+=1
+        elif line.startswith('f'):
+            nFCount+=1
+    #写入点、面的数量
+    lines.insert(0,str(nVCount)+'\n')
+    lines.insert(nVCount+1,str(nFCount)+'\n')
+    #写回硬盘
+    file.seek(0,0)
+    #s='\n'.join(lines)
+    file.writelines(lines)
+    #file.write(s)
+    file.close()
+    pass
+
 # 存储prostate的相关参以及原图
 def SaveProstate():
   #存储nii
@@ -427,6 +451,7 @@ def SaveProstate():
   prostate_name=ctx.field("PatientID").value+"_prostate.obj"
   ctx.field("WEMSave3.filename").value=os.path.join(ctx.field("ObjDirectory").value,prostate_name)
   ctx.field("WEMSave3.save").touch()
+  transformObj(os.path.join(ctx.field("ObjDirectory").value,prostate_name))
   print("obj of prostate mask saved")
   pass
 
@@ -446,6 +471,7 @@ def SaveLesion():
   lesion_name=ctx.field("PatientID").value+"_lesion.obj"
   ctx.field("WEMSave3.filename").value=os.path.join(ctx.field("ObjDirectory").value,lesion_name)
   ctx.field("WEMSave3.save").touch()
+  transformObj(os.path.join(ctx.field("ObjDirectory").value,lesion_name))
   print("obj of lesion mask saved")
   pass
 
@@ -465,6 +491,7 @@ def SaveRectum():
   rectum_name=ctx.field("PatientID").value+"_rectum.obj"
   ctx.field("WEMSave3.filename").value=os.path.join(ctx.field("ObjDirectory").value,rectum_name)
   ctx.field("WEMSave3.save").touch()
+  transformObj(os.path.join(ctx.field("ObjDirectory").value,rectum_name))
   print("obj of rectum mask saved")
   #计算最大截面位置
   CalBasePlane()
