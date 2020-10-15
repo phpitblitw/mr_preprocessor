@@ -547,7 +547,7 @@ def FindLargestSection():
   vectors=points.copy() #vector[i,:]用于记录起点到第i点的方向向量
   max_area=-1
   max_index=-1
-  for i in range(1,points.shape[0]):
+  for i in range(4,points.shape[0]):  #从第4个点开始计算直肠截面积，避免前2个点误差过大
     vectors[i,:]=points[i,:]-points[0,:]
     print("vector "+str(i)+"\t") #测试用 待删除 TODO
     print(vectors[i]) #测试用 待删除 TODO
