@@ -2,6 +2,169 @@
 network  {
   watchlist = ""
 }
+module ImageSave {
+  internal  {
+    frame = "125 757 104 56"
+    moduleGroupName = preprocess
+    windows  {
+      window _default {
+        geometry = "750 404 434 332"
+        sizeHint = "434 332"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ImageSave2
+    taskVerboseLogging = FALSE
+    filename = ""
+    format = DICOMTIFF
+    comment = MeVisLab
+    allowOverwrite = TRUE
+    autoFilename = FALSE
+    sourceName = ""
+    postfix = .result1
+    dicomNameUsed = TRUE
+    dicomMetaHeader = TRUE
+    dicomDerived = TRUE
+    dicomDiscardTags = FrameSpecific
+    dicomStoreTimeInfo = None
+    dicomSetWindow = FALSE
+    dicomWindowCenter = 0
+    dicomWindowWidth = 0
+    dicomIgnoreHalfVoxelShift = FALSE
+    tiffCompression = None
+    tiffTileX = 128
+    tiffTileY = 128
+    tiffTileXAuto = TRUE
+    tiffTileYAuto = TRUE
+    saveDicomHeaderOnly = FALSE
+    pngCompression = Default
+    pngInterlaced = FALSE
+    jpegQuality = 75
+    jpegProgressive = FALSE
+  }
+}
+module Comment {
+  internal  {
+    frame = "249 925 96 56"
+    moduleGroupName = preprocess
+    windows  {
+      window _default {
+        geometry = "839 468 256 205"
+        sizeHint = "256 205"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Comment2
+    comment = "重采样到满足各向同性
+"
+  }
+  internalFields = ""
+}
+module Resample3D {
+  internal  {
+    frame = "125 837 104 56"
+    moduleGroupName = preprocess
+    windows  {
+      window _default {
+        geometry = "860 395 371 303"
+        sizeHint = "371 303"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Resample3D
+    keep = "Scale factor"
+    filter = Lanczos_3
+    isotropic = TRUE
+    filterAlways = FALSE
+    filterAlwaysTolerance = 0
+    zoom = "1 1 6.84444427490234"
+    imageSize = "320 320 205"
+    voxelSize = "0.5625 0.5625 0.5625"
+    subVoxelShift = "0 0 0"
+    useReferenceImage = FALSE
+  }
+}
+module ImageLoad {
+  internal  {
+    frame = "125 925 104 56"
+    moduleGroupName = preprocess
+    windows  {
+      window _default {
+        geometry = "818 415 298 311"
+        sizeHint = "298 311"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ImageLoad6
+    filename = ""
+    autoLoad = TRUE
+    readRaw = FALSE
+    rawX = 1
+    rawY = 1
+    rawZ = 1
+    rawC = 1
+    rawT = 1
+    rawU = 1
+    dataTypeRaw = "unsigned int8"
+    planarConfig = Contiguous
+    byteOrder = LittleEndian
+    dataOffset = 0
+    pageSizeHint = "0 0 0 0 0 0"
+    suppressErrorLog = FALSE
+    dicomIgnoreHalfVoxelShift = FALSE
+  }
+}
+module Comment {
+  internal  {
+    frame = "-391 917 96 56"
+    moduleGroupName = preprocess
+    windows  {
+      window _default {
+        geometry = "839 468 256 205"
+        sizeHint = "256 205"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Comment1
+    comment = "将2D dcm切片组,叠加为3d的dcm数据
+"
+  }
+  internalFields = ""
+}
+module Comment {
+  internal  {
+    frame = "-51 925 88 56"
+    moduleGroupName = preprocess
+    windows  {
+      window _default {
+        geometry = "839 468 256 205"
+        sizeHint = "256 205"
+        wasOpen = no
+        wasActive = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Comment
+    comment = 用于寻找t2/adc序列
+  }
+  internalFields = ""
+}
 module MinMaxScan {
   internal  {
     frame = "4709 701 104 56"
@@ -88,7 +251,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad5
-    filename = "D:/study/summer_break/data/water_film\\231\\raw\\231_prostate.raw"
+    filename = "D:/study/summer_break/data/water_film\\243\\raw\\243_prostate.raw"
     autoLoad = TRUE
     readRaw = TRUE
     rawX = 320
@@ -121,7 +284,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad4
-    filename = "D:/study/summer_break/data/water_film\\231\\raw\\231_rectum.raw"
+    filename = "D:/study/summer_break/data/water_film\\243\\raw\\243_rectum.raw"
     autoLoad = TRUE
     readRaw = TRUE
     rawX = 320
@@ -272,7 +435,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad3
-    filename = "D:/study/summer_break/data/water_film\\231\\raw\\231_rectum.raw"
+    filename = "D:/study/summer_break/data/water_film\\243\\raw\\243_rectum.raw"
     autoLoad = TRUE
     readRaw = TRUE
     rawX = 320
@@ -311,7 +474,7 @@ module WEMSave {
     listenToFinishingNotifications = FALSE
     listenToRepaintNotifications = FALSE
     listenToSelectionChangedNotifications = FALSE
-    filename = "D:/study/summer_break/data/water_film\\231\\obj\\231_rectum.obj"
+    filename = "D:/study/summer_break/data/water_film\\243\\obj\\243_rectum.obj"
     fileType = "Wavefront (.obj)"
     inWEMValid = TRUE
     status = "WEM saved to file."
@@ -691,7 +854,7 @@ module View2D {
     baseColor = "1 1 1"
     margin = "2 2"
     sliceOrigin = "0 0"
-    lutCenter = 1
+    lutCenter = 0.5
     lutWidth = 1
     lutUseTraceColors = FALSE
     annotationOn = FALSE
@@ -806,9 +969,9 @@ module ComposePlane {
   }
   fields  {
     instanceName = ComposePlane1
-    point = "87.8843765258789 119.081694602966 36.5750000181069"
-    normal = "-0.709373474121094 0.675444602966309 30.7999999227395"
-    plane = "-0.0230199683269889 0.0219189382379778 0.999494692934757 37.1435671573998"
+    point = "88.2723999023438 119.424682617188 36.5750000178814"
+    normal = "-0.32135009765625 0.4559326171875 19.2500011622906"
+    plane = "-0.0166865066699734 0.0236748727112443 0.999580442434354 37.914060869708"
   }
 }
 module MPR {
@@ -832,9 +995,9 @@ module MPR {
   }
   fields  {
     instanceName = MPR
-    rotation = "-0.970598240871795 -0.161770287535697 -0.17823980724629 4.708010453338"
-    translation = "87.8894100103157 119.076901866811 36.3564531934494"
-    plane = "-0.0230199683269889 0.0219189382379778 0.999494692934757 37.1435671573998"
+    rotation = "-0.970565088352678 -0.163992793580655 -0.176379627294566 4.70908125409204"
+    translation = "88.2723999023438 119.424682617188 36.5750000178814"
+    plane = "-0.0166865066699734 0.0236748727112443 0.999580442434354 37.914060869708"
     enablePlaneEdit = TRUE
     fillValue = 0
     fieldOfView = 150
@@ -972,13 +1135,13 @@ module WorldVoxelConvert {
   fields  {
     instanceName = WorldVoxelConvert
     voxelX = 105
-    voxelY = 191
+    voxelY = 190
     voxelZ = 0
-    worldX = 87.576675
-    worldY = 79.796669
-    worldZ = 37.503979
-    voxelPos = "105 191 0"
-    worldPos = "87.5766754150391 79.7966690063477 37.503978729248"
+    worldX = 87.772247
+    worldY = 80.698189
+    worldZ = 37.776974
+    voxelPos = "105 190 0"
+    worldPos = "87.7722473144531 80.6981887817383 37.7769737243652"
     voxelMode = TRUE
     worldMode = FALSE
     intVoxelCoords = FALSE
@@ -1016,7 +1179,7 @@ module View3D {
     greyWidth = 0.66500002
     camType = TRUE
     camPosition = "218.994827270508 203.125961303711 -237.264312744141"
-    camOrientation = "0.610980451107025 0.676499307155609 0.411158919334412 2.85318970680237"
+    camOrientation = "0.610980451107025 0.676499307155609 0.411158949136734 2.85318970680237"
     initialCameraOrientation = CAMERA_KEEP_AS_IS
     camFar = 473.46042
     camNear = 207.29681
@@ -1179,11 +1342,11 @@ module MarkerListInspector {
     drawMode = DrawModeFast
     useFastMode = TRUE
     hide3DView = TRUE
-    numMarkers = 23
+    numMarkers = 26
     selMarker = -1
-    markerPosition = "87.8843765258789 119.081694602966 36.5750000181069"
+    markerPosition = "88.03125 120.09375 102.024993896484"
     markerVector = "0 0 0"
-    currentMarker = 8
+    currentMarker = 25
     currentType = 0
     detail = FALSE
     tabbar = shortinfo
@@ -1262,7 +1425,7 @@ module View3D {
     greyWidth = 0.66500002
     camType = TRUE
     camPosition = "293.753356933594 -68.3492584228516 -18.1478939056396"
-    camOrientation = "0.756033003330231 0.389705508947372 0.525874257087708 1.93859577178955"
+    camOrientation = "0.756033062934875 0.389705538749695 0.525874257087708 1.93859577178955"
     initialCameraOrientation = CAMERA_KEEP_AS_IS
     camFar = 461.85324
     camNear = 218.88094
@@ -1984,12 +2147,12 @@ module ImageSave {
   fields  {
     instanceName = ImageSave1
     taskVerboseLogging = FALSE
-    filename = "D:/study/summer_break/data/water_film\\231\\raw\\231_original.raw"
+    filename = "D:/study/summer_break/data/water_film\\243\\raw\\243_original.raw"
     format = RAW
     comment = MeVisLab
     allowOverwrite = TRUE
     autoFilename = FALSE
-    sourceName = "D:/study/summer_break/data/water_film\\231\\dcm3D\\______SHUI_2117839_0014.dcm"
+    sourceName = "D:/study/summer_break/data/water_film\\243\\dcm3D\\______SHUI_2117839_0014.dcm"
     postfix = .result1
     dicomNameUsed = TRUE
     dicomMetaHeader = TRUE
@@ -2087,7 +2250,7 @@ module View3D {
     greyWidth = 0
     camType = TRUE
     camPosition = "-336.191070556641 -15.0209045410156 90.3050384521484"
-    camOrientation = "-0.594136118888855 0.522442936897278 0.611600995063782 4.48417806625366"
+    camOrientation = "-0.59413605928421 0.522442936897278 0.611600995063782 4.48417806625366"
     initialCameraOrientation = CAMERA_KEEP_AS_IS
     camFar = 485.91348
     camNear = 234.72243
@@ -2266,63 +2429,6 @@ module itkImageFileReader {
     unresolvedFileName = ""
   }
 }
-module View2D {
-  internal  {
-    frame = "2317 301 120 56"
-    moduleGroupName = ""
-    windows  {
-      window _default {
-        geometry = "454 396 400 400"
-        sizeHint = "400 400"
-        wasOpen = no
-        wasActive = no
-      }
-    }
-  }
-  fields  {
-    instanceName = View2D1
-    inventorInputOn = TRUE
-    view2DExtensionsOn = TRUE
-    startSlice = 0
-    numSlices = 1
-    numXSlices = 1
-    sliceStep = 1
-    slab = 1
-    blendMode = BLEND_REPLACE
-    timePoint = 0
-    maxTimePoint = 0
-    filterMode = FILTER_LINEAR
-    standardKeys = TRUE
-    cineMode = CINE_Z
-    cineDirection = CINE_PINGPONG
-    cineRepeat = CINE_ONCE
-    cineSpeed = 0.1
-    snapToCenter = FALSE
-    zoomMode = VIEW2D_AUTO_ZOOM
-    unzoomOnImageChange = FALSE
-    sliceZoom = 1
-    sliceZoomSynced = 1
-    baseColor = "1 1 1"
-    margin = "2 2"
-    sliceOrigin = "0 0"
-    lutCenter = 0.5
-    lutWidth = 1
-    lutUseTraceColors = FALSE
-    annotationOn = TRUE
-    annotationMode = ANNO_MODE_AUTO
-    annotationSizeMode = ANNO_SHOW_DETAILED
-    annotationCol = "0.899999976158142 0.899999976158142 0.899999976158142"
-    annotationFontSize = ANNO_SIZE_AUTO
-    annoCoords = Voxel
-    annoCTValue = AsIs
-    borderOn = TRUE
-    borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
-    valueHighPrecision = TRUE
-    maxPrecision = 4
-    plane = "0 0 1 -79.5582504272461"
-  }
-  internalFields = ""
-}
 module itkImageFileWriter {
   internal  {
     frame = "2765 749 136 56"
@@ -2384,7 +2490,7 @@ module ImageSave {
   fields  {
     instanceName = ImageSave
     taskVerboseLogging = FALSE
-    filename = "D:/study/summer_break/data/water_film\\231\\raw\\231_rectum.raw"
+    filename = "D:/study/summer_break/data/water_film\\243\\raw\\243_rectum.raw"
     format = RAW
     comment = MeVisLab
     allowOverwrite = TRUE
@@ -2486,8 +2592,8 @@ module SoExaminerViewer {
     height = 128.18929
     position = "-30.2885189056396 67.0159301757812 13.9380550384521"
     orientation = "-0.566402554512024 -0.240839019417763 0.788152635097504 2.94614171981812"
-    nearDistance = -17.689793
-    farDistance = 75.810257
+    nearDistance = -19.327124
+    farDistance = 76.889435
     focalDistance = 34.831348
     forceRedrawOnInteraction = FALSE
     button1events = TO_VIEWER
@@ -2948,7 +3054,7 @@ module SynchroView2D {
     disconnectOnHide = TRUE
     snapToCenter1 = FALSE
     snapToCenter2 = FALSE
-    slice1 = 29
+    slice1 = 0
     slice2 = 0
     timepoint1 = 0
     timepoint2 = 0
@@ -2962,7 +3068,7 @@ module SynchroView2D {
     background = "0 0 0"
     borderOn = FALSE
     showCurrentPos = FALSE
-    worldPosition = "-14.2550964355469 95.9467010498047 32.0917434692383"
+    worldPosition = "-5.09011840820312 114.64323425293 32.0917434692383"
   }
   internalFields = ""
 }
@@ -3022,8 +3128,8 @@ module DicomTagViewer {
 }
 module ImageLoad {
   internal  {
-    frame = "301 821 104 56"
-    moduleGroupName = ""
+    frame = "-187 925 104 56"
+    moduleGroupName = preprocess
     windows  {
       window _default {
         geometry = "818 415 298 311"
@@ -3035,7 +3141,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad2
-    filename = "D:/study/summer_break/data/water_film\\231\\dcm3D\\______SHUI_2117839_0015.dcm"
+    filename = "D:/study/summer_break/data/water_film\\243\\dcm3D\\______SHUI_2117839_0015.dcm"
     autoLoad = TRUE
     readRaw = FALSE
     rawX = 1
@@ -3055,8 +3161,8 @@ module ImageLoad {
 }
 module DicomTagViewer {
   internal  {
-    frame = "289 685 128 56"
-    moduleGroupName = ""
+    frame = "-199 789 128 56"
+    moduleGroupName = preprocess
     windows  {
       window _default {
         geometry = "293 580 478 343"
@@ -3080,7 +3186,7 @@ module DicomTagViewer {
     maxValueLen = 80
     showPrivateTags = FALSE
     tagListSubset = AllTags
-    dicomFile = "D:/study/summer_break/data/water_film\\231\\dcm3D\\______SHUI_2117839_0015.dcm"
+    dicomFile = "D:/study/summer_break/data/water_film\\243\\dcm3D\\______SHUI_2117839_0015.dcm"
     trimSpaces = FALSE
   }
 }
@@ -3111,7 +3217,7 @@ module DicomTagViewer {
     maxValueLen = 80
     showPrivateTags = FALSE
     tagListSubset = AllTags
-    dicomFile = "D:/study/summer_break/data/water_film\\231\\dcm3D\\______SHUI_2117839_0014.dcm"
+    dicomFile = "D:/study/summer_break/data/water_film\\243\\dcm3D\\______SHUI_2117839_0014.dcm"
     trimSpaces = FALSE
   }
 }
@@ -3154,7 +3260,7 @@ module Info {
 }
 module MatlabScriptWrapper {
   internal  {
-    frame = "1393 869 144 56"
+    frame = "1393 893 144 56"
     moduleGroupName = ""
     windows  {
       window _default {
@@ -3198,7 +3304,7 @@ world_mat(1:3,4) = t"
     scalar5 = 0
     numberOfStrings = 1
     stringName0 = dcm_path
-    string0 = "D:/study/summer_break/data/water_film\\231\\dcm3D\\______SHUI_2117839_0014.dcm"
+    string0 = "D:/study/summer_break/data/water_film\\243\\dcm3D\\______SHUI_2117839_0014.dcm"
     stringName1 = string1
     string1 = ""
     stringName2 = string2
@@ -3260,7 +3366,7 @@ module ImageLoad {
   }
   fields  {
     instanceName = ImageLoad
-    filename = "D:/study/summer_break/data/water_film\\231\\dcm3D\\______SHUI_2117839_0014.dcm"
+    filename = "D:/study/summer_break/data/water_film\\243\\dcm3D\\______SHUI_2117839_0014.dcm"
     autoLoad = TRUE
     readRaw = FALSE
     rawX = 1
@@ -3280,7 +3386,7 @@ module ImageLoad {
 }
 module Info {
   internal  {
-    frame = "1597 869 56 56"
+    frame = "1605 893 56 56"
     moduleGroupName = ""
     windows  {
       window _default {
@@ -3299,7 +3405,7 @@ module Info {
 }
 module ImagePropertyConvert {
   internal  {
-    frame = "1605 757 152 56"
+    frame = "1605 805 152 56"
     moduleGroupName = ""
     windows  {
       window _default {
@@ -3377,7 +3483,7 @@ module Info {
 }
 module ImageLoad {
   internal  {
-    frame = "1837 757 104 56"
+    frame = "1885 709 104 56"
     moduleGroupName = ""
     windows  {
       window _default {
@@ -3563,7 +3669,7 @@ module itkImageFileWriter {
     correctSubVoxelShift = FALSE
     forceDirectionCosineWrite = TRUE
     outputVoxelType = int16
-    info = ""
+    info = "File saved successfully"
     unresolvedFileName = ""
   }
 }
@@ -3622,7 +3728,7 @@ module SoView2DOverlay {
   }
   fields  {
     instanceName = SoView2DOverlay1
-    drawingOn = FALSE
+    drawingOn = TRUE
     editingOn = TRUE
     maskValid = TRUE
     fixZOn = TRUE
@@ -3894,7 +4000,7 @@ module CSOInspector {
     instanceName = CSOInspector
     markerSizeScaling = 1
     continuousUpdate = FALSE
-    numCSOs = 8
+    numCSOs = 13
     numGroups = 0
     useDecoration = FALSE
     showBackground = TRUE
@@ -4027,7 +4133,7 @@ module CSOManager {
     enableRepaintNotification = TRUE
     csoTreeView = ""
     groupTreeView = ""
-    numCSOs = 8
+    numCSOs = 13
     numGroups = 0
     numSelectedCSOs = 0
     numSelectedGroups = 0
@@ -4166,8 +4272,8 @@ module SoView2DCSOEditor {
 }
 module DicomImport {
   internal  {
-    frame = "309 605 104 56"
-    moduleGroupName = ""
+    frame = "-515 917 104 56"
+    moduleGroupName = preprocess
     windows  {
       window _default {
         geometry = "709 470 516 236"
@@ -4180,12 +4286,14 @@ module DicomImport {
   fields  {
     instanceName = DicomImport
     source = D:/study/summer_break/data/water_film/dcm_folders
-    target = "D:/study/summer_break/data/water_film\\231\\dcm3D"
+    target = "D:/study/summer_break/data/water_film\\243\\dcm3D"
     options = "-r -v1"
   }
   internalFields = ""
 }
 connections  {
+  ImageSave2.input0 = Resample3D.output0
+  Resample3D.input0 = ImageLoad6.output0
   MinMaxScan.input0 = MPR.output0
   ImagePropertyConvert3.input0 = ImageLoad5.output0
   ImagePropertyConvert2.input0 = ImageLoad4.output0
@@ -4234,7 +4342,6 @@ connections  {
   View3D.inImage = DtfSkeletonization.output0
   itkImageFileWriter5.input0 = DtfSkeletonization.output0
   DtfSkeletonization.input0 = itkImageFileReader2.output0
-  View2D1.inImage = CSOConvertTo3DMask.output0
   itkImageFileWriter4.input0 = itkImageFileReader.output0
   ImageSave.input0 = itkImageFileReader1.output0
   SoExaminerViewer.children = "SoBackground.self SoWEMRenderer.self SoWEMRenderer1.self SoWEMRenderer2.self"
@@ -4346,6 +4453,18 @@ networkModel  {
         objectName = objGenerator
         parentUniqueId = 0
         frame = "5128 426 210 596"
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 231
+        objectName = preprocess
+        parentUniqueId = 0
+        frame = "-540 682 910 324"
         color  {
           r = 45
           g = 226

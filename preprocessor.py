@@ -8,6 +8,7 @@ import random
 import threading, subprocess
 import math
 import numpy as np
+import time
 import configparser
 #import pydicom
 
@@ -36,7 +37,32 @@ def Generate3dFile():
   ctx.field("DicomImport.source").value=ctx.field("PatientDataDirectory").value
   ctx.field("DicomImport.target").value=ctx.field("Dcm3DDirectory").value
   ctx.field("DicomImport.import").touch()
+  # 不能放在这儿，因为dicomimport会另外开辟一个线程
+  # 在resample之前，dicomimport未必能完成
+  #ResampleDcmInFolder(ctx.field("Dcm3DDirectory").value)  # 将数据resample到各向同性 
   print("3d dcm file saved")
+  pass
+
+#对目录下的所有dcm文件，resample到各向同性
+def ResampleDcmInFolder(root):
+  root=root.replace("\\","/")
+  file_dir=os.listdir(root)
+  if(len(file_dir)==0):
+    pass
+  for i in range(len(file_dir)):
+    print(str(i)+file_dir[i])
+    if(file_dir[i][-3:] != "dcm"):  #跳过非dcm文件
+      continue
+    if(file_dir[i][-13:] == "resampled.dcm"):  #跳过resample过的文件
+      continue
+    # 生成并存储resample后的文件
+    src_name=os.path.join(root,file_dir[i])
+    print("resampling"+src_name)
+    ctx.field("ImageLoad6.filename").value=src_name
+    ctx.field("ImageLoad6.load").touch()
+    dst_name=src_name[:-4]+"_resampled"+src_name[-4:]
+    ctx.field("ImageSave2.filename").value=dst_name
+    ctx.field("ImageSave2.save").touch()
   pass
 
 # 寻找t2 adc序列数据 加载图像
@@ -45,6 +71,8 @@ def LoadImage():
   InitializePath()
   InitializeLabel()
 
+  ResampleDcmInFolder(ctx.field("Dcm3DDirectory").value)  # 将数据resample到各向同性
+
   file_type=""
   dst_root_path=os.path.join(ctx.field("DestinationDataDirectory").value,ctx.field("PatientID").value)
   root=ctx.field("Dcm3DDirectory").value
@@ -52,19 +80,25 @@ def LoadImage():
   if(len(root)==0):
     pass
   for i in range(len(file_dir)):
-    if(file_dir[i][-3:] != "dcm"):
+    #if(file_dir[i][-3:] != "dcm"):
+    #  continue
+    if(file_dir[i][-13:]!="resampled.dcm"):  #仅采用resampled数据
       continue
     name=os.path.join(root,file_dir[i])
     ctx.field("ImageLoad2.filename").value=name
     ctx.field("ImageLoad2.load").touch()
     ctx.field("DicomTagViewer2.getValues").touch()
     file_type=ctx.field("DicomTagViewer2.tagValue3").value
+    adc_found_flag=False
     if ("t2_tse_tra" in file_type): #找t2序列图像
       print("name  "+name)
       ctx.field("T2SeriesPath").value=name
     elif("ADC" in file_type): #找adc序列图像
+      adc_found_flag=true
       print("name  "+name)
       ctx.field("ADCSeriesPath").value=name
+    if(not adc_found_flag):
+      ctx.field("ADCSeriesPath").value=ctx.field("T2SeriesPath").value
   #t2 adc序列路径修改后，FieldListener响应修改，调用相关函数完成图像读取和显示
   # 根据读取的dcm数据参数,设置其他模块对应的尺寸、体素大小信息
   ctx.field("ImageLoad3.rawX").value=ctx.field("Info2.sizeX").value
